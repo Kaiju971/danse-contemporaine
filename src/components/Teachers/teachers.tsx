@@ -53,8 +53,8 @@ export const Teachers = () => {
 
   // radius en % de la taille du conteneur : 35 garde les cartes bien
   // à l'intérieur (centre ± 35%, donc entre 15% et 85%).
-  const radius = 35;
-  const center = { x: 50, y: 50 };
+  const radius = 30;
+  const center = { x: 35, y: 35 };
 
   // On récupère le prof sélectionné une seule fois, au lieu de refaire
   // teachers.find(...) à chaque endroit où on en a besoin.

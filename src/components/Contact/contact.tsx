@@ -24,12 +24,18 @@ import {
   Facebook,
   Instagram,
   YouTube,
+  X,
 } from "@mui/icons-material";
+import LinkedIn from "@mui/icons-material/LinkedIn";
+import TikTok from "@mui/icons-material/MusicNote";
 
 const socialLinks = [
   { name: "Facebook", icon: <Facebook />, url: "#" },
   { name: "Instagram", icon: <Instagram />, url: "#" },
   { name: "YouTube", icon: <YouTube />, url: "#" },
+  { name: "LinkedIn", icon: <LinkedIn />, url: "#" },
+  { name: "X", icon: <X />, url: "#" },
+  { name: "TikTok", icon: <TikTok />, url: "#" },
 ];
 
 export const Contact = () => {

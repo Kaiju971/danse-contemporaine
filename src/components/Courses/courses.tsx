@@ -76,7 +76,11 @@ export const Courses = () => {
                 <CourseCard>
                   <CardContent>
                     <CourseLevelChip label={course.level} size="small" />
-                    <Typography variant="h3" gutterBottom>
+                    <Typography
+                      variant="h3"
+                      sx={{ fontSize: "50px" }}
+                      gutterBottom
+                    >
                       {course.title}
                     </Typography>
                     <Typography variant="body2" sx={{ mb: 2 }}>

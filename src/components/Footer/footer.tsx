@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Typography } from "@mui/material";
-import { FooterContainer, FooterLink } from "./footer.styled";
+import { FooterContainer, FooterLink, FooterText } from "./footer.styled";
 
 export const Footer = () => {
   return (
@@ -11,17 +11,15 @@ export const Footer = () => {
       viewport={{ once: true }}
     >
       <FooterContainer>
-        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.6)" }}>
-          © 2026 École de Danse Contemporaine. Tous droits réservés.{" "}
-          <Typography
-            component="span"
-            variant="body2"
-            sx={{ color: "rgba(255, 255, 255, 0.4)" }}
-          >
-            |
-          </Typography>{" "}
-          <FooterLink href="#">Mentions légales</FooterLink>
-        </Typography>
+        <FooterText variant="body2" align="center" sx={{ mt: 4 }}>
+          © {new Date().getFullYear()} Danse Contemporaine. Tous droits
+          réservés.{" "}
+          <FooterLink href="/mentions-legales">Mentions légales</FooterLink>
+          {" - "}
+          <FooterLink href="/confidentialite">
+            Politique de confidentialité
+          </FooterLink>
+        </FooterText>
 
         <Typography
           variant="caption"

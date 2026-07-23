@@ -20,7 +20,7 @@ export const About = () => {
       <Container maxWidth="lg">
         <Grid
           container
-          spacing={8}
+          spacing={10}
           sx={{
             alignItems: "center",
           }}
@@ -32,7 +32,7 @@ export const About = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Typography variant="h2" gutterBottom>
+              <Typography variant="h3" gutterBottom>
                 L'ÉCOLE DE DANSE{" "}
                 <span style={{ color: "#00ff88" }}>CONTEMPORAINE</span>
               </Typography>

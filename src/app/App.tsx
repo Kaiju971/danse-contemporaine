@@ -11,6 +11,8 @@ import { Schedule } from "../components/Schedule";
 import { Pricing } from "../components/Pricing";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
+import { CookieConsent } from "../components/CookieConsent";
+
 
 export function App() {
   return (
@@ -26,6 +28,7 @@ export function App() {
         <Pricing />
         <Contact />
         <Footer />
+        <CookieConsent />
       </Layout>
     </ThemeProvider>
   );
