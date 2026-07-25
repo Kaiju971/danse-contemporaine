@@ -8,6 +8,7 @@ export const Home = () => {
       id="home"
       sx={{
         minHeight: "100vh",
+        // mWidth: "100vw",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -20,7 +21,7 @@ export const Home = () => {
       {/* Effet de projecteur */}
       <Box
         sx={{
-          position: "absolute",
+          position: "relative",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",

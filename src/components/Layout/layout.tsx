@@ -16,7 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
-
+import { ThemeToggleButton } from "../../theme/themeToggleButton";
 
 const navItems = [
   { id: "home", label: "Accueil" },
@@ -28,6 +28,7 @@ const navItems = [
   { id: "pricing", label: "Tarifs" },
   { id: "contact", label: "Contact" },
 ];
+const drawerWidth = 700;
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
@@ -46,12 +47,24 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         sx={{ background: "rgba(0, 0, 0, 0.2)", backdropFilter: "blur(10px)" }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ fontWeight: 700, cursor: "pointer" }}
+            onClick={() => scrollToSection("home")}
+          >
             DANSE <span style={{ color: "#00ff88" }}>CONTEMPORAINE</span>
           </Typography>
-          {!isMobile ? (
-            <Box sx={{ display: "flex", gap: 3 }}>
-              {navItems.map((item) => (
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: isMobile ? 1 : 3,
+            }}
+          >
+            {!isMobile &&
+              navItems.map((item) => (
                 <Typography
                   key={item.id}
                   sx={{
@@ -64,24 +77,29 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                   {item.label}
                 </Typography>
               ))}
-            </Box>
-          ) : (
-            <IconButton color="inherit" onClick={() => setMobileOpen(true)}>
-              <MenuIcon />
-            </IconButton>
-          )}
+
+            <ThemeToggleButton />
+
+            {isMobile && (
+              <IconButton color="inherit" onClick={() => setMobileOpen(true)}>
+                <MenuIcon />
+              </IconButton>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
 
       <Drawer
-        anchor="right"
+        anchor="left"
+        variant="persistent"
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         sx={{
+          width: drawerWidth,
           "& .MuiPaper-root": { background: theme.palette.background.paper },
         }}
       >
-        <Box sx={{ width: 250, p: 2 }}>
+        <Box sx={{ width: 1200, p: 2 }}>
           <IconButton onClick={() => setMobileOpen(false)} sx={{ mb: 2 }}>
             <CloseIcon />
           </IconButton>

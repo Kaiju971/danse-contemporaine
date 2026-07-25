@@ -13,7 +13,7 @@ export const StatsCard = styled(Paper)(({ theme }) => ({
   background: "rgba(255, 255, 255, 0.05)",
   border: `1px solid ${theme.palette.divider}`,
   borderRadius: (theme.shape.borderRadius as number) * 2,
-  padding: theme.spacing(3),
+  padding: theme.spacing(2),
   textAlign: "center",
   transition: "all 0.3s ease",
   "&:hover": {

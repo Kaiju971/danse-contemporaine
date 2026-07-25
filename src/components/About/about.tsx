@@ -40,7 +40,7 @@ export const About = () => {
                 Fondée par Pascale, notre école est un lieu où la danse
                 contemporaine devient accessible à toutes et à tous.
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" >
                 Nous croyons en une approche bienveillante et énergique, où
                 chaque élève peut développer sa confiance en soi, sa créativité
                 et son expression corporelle dans une ambiance chaleureuse et

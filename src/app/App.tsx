@@ -1,6 +1,3 @@
-import { ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
-import { theme } from "../theme";
 import { Layout } from "../components/Layout";
 import { Home } from "../components/Home";
 import { About } from "../components/About";
@@ -13,23 +10,19 @@ import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 import { CookieConsent } from "../components/CookieConsent";
 
-
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Layout>
-        <Home />
-        <About />
-        <Courses />
-        <Teachers />
-        <Gallery />
-        <Schedule />
-        <Pricing />
-        <Contact />
-        <Footer />
-        <CookieConsent />
-      </Layout>
-    </ThemeProvider>
+    <Layout>
+      <Home />
+      <About />
+      <Courses />
+      <Teachers />
+      <Gallery />
+      <Schedule />
+      <Pricing />
+      <Contact />
+      <Footer />
+      <CookieConsent />
+    </Layout>
   );
 }
