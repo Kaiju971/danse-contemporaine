@@ -70,15 +70,6 @@ export const Contact = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("submitting");
-    // alert("Merci pour votre message ! Nous vous contacterons bientôt.");
-    // setFormData({
-    //   firstName: "",
-    //   lastName: "",
-    //   email: "",
-    //   phone: "",
-    //   course: "",
-    //   message: "",
-    // });
     try {
       await fetch("/", {
         method: "POST",
