@@ -21,16 +21,23 @@ const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
             primary: "#ffffff",
             secondary: "rgba(255, 255, 255, 0.7)",
           },
+          divider: "rgba(255, 255, 255, 0.1)",
         }
       : {
           background: {
-            default: "#f4f7fb",
+            // léger bleu-gris, écho de la teinte navy du mode dark
+            // (au lieu d'un gris générique)
+            default: "#eef2fa",
             paper: "#ffffff",
           },
           text: {
-            primary: "rgba(0, 0, 0, 0.87)",
-            secondary: "rgba(0, 0, 0, 0.6)",
+            // même navy que le fond du mode dark, utilisé cette fois en
+            // texte : garde une vraie identité de marque au lieu d'un
+            // noir/gris MUI par défaut
+            primary: "#001133",
+            secondary: "rgba(0, 17, 51, 0.65)",
           },
+          divider: "rgba(0, 17, 51, 0.12)",
         }),
   },
   typography: {
@@ -51,7 +58,11 @@ const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
           border:
             mode === "dark"
               ? "1px solid rgba(255, 255, 255, 0.1)"
-              : "1px solid rgba(0, 0, 0, 0.1)",
+              : "1px solid rgba(0, 17, 51, 0.12)",
+          // une carte blanche sans ombre se voit à peine sur fond clair :
+          // on ajoute une ombre douce uniquement en mode light.
+          boxShadow:
+            mode === "dark" ? "none" : "0 2px 12px rgba(0, 17, 51, 0.08)",
         },
       },
     },

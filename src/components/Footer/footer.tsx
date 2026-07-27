@@ -2,7 +2,13 @@ import { motion } from "framer-motion";
 import { Typography } from "@mui/material";
 import { FooterContainer, FooterLink, FooterText } from "./footer.styled";
 
-export const Footer = () => {
+// ✅ 1. Ajoute cette interface en haut du fichier
+interface FooterProps {
+  onLegalNoticeClick?: () => void;
+  onPrivacyClick?: () => void; // Optionnel pour la politique de confidentialité
+}
+
+export const Footer = ({ onLegalNoticeClick, onPrivacyClick }: FooterProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -14,9 +20,23 @@ export const Footer = () => {
         <FooterText variant="body2" align="center" sx={{ mt: 4 }}>
           © {new Date().getFullYear()} Danse Contemporaine. Tous droits
           réservés.{" "}
-          <FooterLink href="/mentions-legales">Mentions légales</FooterLink>
+          <FooterLink
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onLegalNoticeClick?.(); // ✅ Appelle la fonction au clic
+            }}
+          >
+            Mentions légales
+          </FooterLink>
           {" - "}
-          <FooterLink href="/confidentialite">
+          <FooterLink
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onPrivacyClick?.(); // ✅ Appelle la fonction au clic
+            }}
+          >
             Politique de confidentialité
           </FooterLink>
         </FooterText>
@@ -24,7 +44,7 @@ export const Footer = () => {
         <Typography
           variant="caption"
           component="p"
-          sx={{ color: "rgba(255, 255, 255, 0.4)", mt: 1 }}
+          sx={{ color: "text.secondary", mt: 1 }}
         >
           Site conçu par SWAM Concept
         </Typography>

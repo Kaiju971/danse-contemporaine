@@ -5,7 +5,7 @@ import {
   StatNumber,
   StatLabel,
 } from "./about.styled";
-import { Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 
 const stats = [
   { number: "10+", label: "Années d'expérience" },
@@ -34,13 +34,15 @@ export const About = () => {
             >
               <Typography variant="h3" gutterBottom>
                 L'ÉCOLE DE DANSE{" "}
-                <span style={{ color: "#00ff88" }}>CONTEMPORAINE</span>
+                <Box component="span" sx={{ color: "primary.main" }}>
+                  CONTEMPORAINE
+                </Box>
               </Typography>
               <Typography variant="body1" sx={{ mb: 2 }}>
                 Fondée par Pascale, notre école est un lieu où la danse
                 contemporaine devient accessible à toutes et à tous.
               </Typography>
-              <Typography variant="body1" >
+              <Typography variant="body1">
                 Nous croyons en une approche bienveillante et énergique, où
                 chaque élève peut développer sa confiance en soi, sa créativité
                 et son expression corporelle dans une ambiance chaleureuse et

@@ -25,7 +25,7 @@ import image6 from "../../assets/image/image6Gallery.png";
 import image7 from "../../assets/image/image7Gallery.png";
 import image8 from "../../assets/image/image8Gallery.png";
 import image9 from "../../assets/image/image9Gallery.png";
- import image10 from "../../assets/image/image10Gallery.png";
+import image10 from "../../assets/image/image10Gallery.png";
 
 const galleryImages = [
   image1,
@@ -52,7 +52,12 @@ export const Gallery = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <Typography variant="h2" align="center" gutterBottom>
+          <Typography
+            variant="h2"
+            align="center"
+            gutterBottom
+            sx={{ color: "primary.main" }}
+          >
             GALERIE
           </Typography>
           <Typography
@@ -88,7 +93,15 @@ export const Gallery = () => {
                     sx={{ objectFit: "cover" }}
                   />
                   <ImageOverlay className="overlay">
-                    <ZoomInIcon sx={{ fontSize: 40 }} />
+                    <ZoomInIcon
+                      sx={{
+                        fontSize: 40,
+                        color: (theme) =>
+                          theme.palette.mode === "dark"
+                            ? "common.white"
+                            : "primary.main",
+                      }}
+                    />
                   </ImageOverlay>
                 </GalleryImageCard>
               </motion.div>
@@ -129,7 +142,10 @@ export const Gallery = () => {
                   position: "absolute",
                   top: -48,
                   right: 0,
-                  color: "common.white",
+                  color: (theme) =>
+                    theme.palette.mode === "dark"
+                      ? "common.white"
+                      : "primary.main",
                   background: "rgba(255, 255, 255, 0.1)",
                   "&:hover": {
                     background: "rgba(255, 255, 255, 0.2)",

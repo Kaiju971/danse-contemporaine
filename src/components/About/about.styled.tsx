@@ -10,7 +10,12 @@ export const AboutContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const StatsCard = styled(Paper)(({ theme }) => ({
-  background: "rgba(255, 255, 255, 0.05)",
+  // Voile blanc en dark (ressort sur fond navy), voile navy très léger
+  // en light (sinon invisible sur un fond déjà blanc).
+  background:
+    theme.palette.mode === "dark"
+      ? "rgba(255, 255, 255, 0.05)"
+      : "rgba(0, 17, 51, 0.03)",
   border: `1px solid ${theme.palette.divider}`,
   borderRadius: (theme.shape.borderRadius as number) * 2,
   padding: theme.spacing(2),

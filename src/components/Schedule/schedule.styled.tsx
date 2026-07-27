@@ -7,9 +7,15 @@ export const ScheduleContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(8, 0),
 }));
 
+// Grid (pas flex) avec des colonnes à largeur fixe (1fr) : chaque
+// colonne fait exactement la même largeur sur toutes les lignes, peu
+// importe la longueur du texte à l'intérieur (contrairement à flexGrow
+// qui varie selon le contenu du voisin).
 export const ScheduleItem = styled(Paper)(({ theme }) => ({
-  display: "flex",
+  display: "grid",
+  gridTemplateColumns: "40px 1fr 1fr auto",
   alignItems: "center",
+  gap: theme.spacing(2),
   padding: theme.spacing(2),
   marginBottom: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
@@ -29,6 +35,5 @@ export const DayCircle = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginRight: theme.spacing(2),
   flexShrink: 0,
 }));

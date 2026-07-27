@@ -16,6 +16,7 @@ import {
   Box,
   Link,
   IconButton,
+  MenuItem,
 } from "@mui/material";
 import {
   LocationOn,
@@ -28,6 +29,7 @@ import {
 } from "@mui/icons-material";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import TikTok from "@mui/icons-material/MusicNote";
+// import Instagram from "..//../assets/image/instagram.png"
 
 const socialLinks = [
   { name: "Facebook", icon: <Facebook />, url: "#" },
@@ -37,6 +39,14 @@ const socialLinks = [
   { name: "X", icon: <X />, url: "#" },
   { name: "TikTok", icon: <TikTok />, url: "#" },
 ];
+
+//Encode un objet en x-form-urlencoded, seul format accepté par
+//Netlify Forms (pas de JSON)
+
+const encode = (data: Record<string, string>) =>
+  Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join("&");
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -48,22 +58,45 @@ export const Contact = () => {
     message: "",
   });
 
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Merci pour votre message ! Nous vous contacterons bientôt.");
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      course: "",
-      message: "",
-    });
+    setStatus("submitting");
+    // alert("Merci pour votre message ! Nous vous contacterons bientôt.");
+    // setFormData({
+    //   firstName: "",
+    //   lastName: "",
+    //   email: "",
+    //   phone: "",
+    //   course: "",
+    //   message: "",
+    // });
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-form-urlencoded" },
+        body: encode({ "form-name": "contact", ...formData }),
+      });
+      setStatus("success");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        course: "",
+        message: "",
+      });
+    } catch (error) {
+      setStatus("error");
+    }
   };
 
   return (
@@ -75,7 +108,12 @@ export const Contact = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <Typography variant="h2" align="center" gutterBottom>
+          <Typography
+            variant="h2"
+            align="center"
+            gutterBottom
+            sx={{ color: "primary.main" }}
+          >
             CONTACT
           </Typography>
           <Typography
@@ -198,7 +236,23 @@ export const Contact = () => {
                 <Typography variant="h4" gutterBottom>
                   Pré-inscription
                 </Typography>
-                <form onSubmit={handleSubmit}>
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                >
+                  {/* Requis par Netlify pour relier ce POST au formulaire détecté au build via le formulaire "fantôùe statique. */}
+                  <input type="hidden" name="form-name" value="contact" />
+                  {/* Piège à bots : un humain ne remplit jamais ce champ */}
+                  <Box sx={{ display: "none" }}>
+                    <label>
+                      Ne pas remplir si vous êtes humain :
+                      <input name="bot-field" />
+                    </label>
+                  </Box>
+
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 12, sm: 6 }}>
                       <TextField
@@ -209,7 +263,7 @@ export const Contact = () => {
                         onChange={handleChange}
                         required
                         slotProps={{
-                          inputLabel: { style: { color: "#00ff88" } },
+                          inputLabel: { style: { color: "primary.main" } },
                         }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
@@ -230,7 +284,7 @@ export const Contact = () => {
                         onChange={handleChange}
                         required
                         slotProps={{
-                          inputLabel: { style: { color: "#00ff88" } },
+                          inputLabel: { style: { color: "primary.main" } },
                         }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
@@ -252,7 +306,7 @@ export const Contact = () => {
                         onChange={handleChange}
                         required
                         slotProps={{
-                          inputLabel: { style: { color: "#00ff88" } },
+                          inputLabel: { style: { color: "primary.main" } },
                         }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
@@ -272,7 +326,7 @@ export const Contact = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         slotProps={{
-                          inputLabel: { style: { color: "#00ff88" } },
+                          inputLabel: { style: { color: "primary.main" } },
                         }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
@@ -293,8 +347,7 @@ export const Contact = () => {
                         onChange={handleChange}
                         select
                         slotProps={{
-                          inputLabel: { style: { color: "#00ff88" } },
-                          select: { native: true },
+                          inputLabel: { style: { color: "primary.main" } },
                         }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
@@ -305,16 +358,22 @@ export const Contact = () => {
                           },
                         }}
                       >
-                        <option value="">Sélectionnez un cours</option>
-                        <option value="Contemporain Débutant">
+                        <MenuItem
+                          value=""
+                          disabled
+                          sx={{ color: "primary.main" }}
+                        >
+                          Sélectionnez un cours
+                        </MenuItem>
+                        <MenuItem value="Contemporain Débutant">
                           Contemporain Débutant
-                        </option>
-                        <option value="Contemporain Intermédiaire">
+                        </MenuItem>
+                        <MenuItem value="Contemporain Intermédiaire">
                           Contemporain Intermédiaire
-                        </option>
-                        <option value="Atelier Création">
+                        </MenuItem>
+                        <MenuItem value="Atelier Création">
                           Atelier Création
-                        </option>
+                        </MenuItem>
                       </TextField>
                     </Grid>
                     <Grid size={{ xs: 12 }}>
@@ -327,7 +386,7 @@ export const Contact = () => {
                         multiline
                         rows={4}
                         slotProps={{
-                          inputLabel: { style: { color: "#00ff88" } },
+                          inputLabel: { style: { color: "primary.main" } },
                         }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
@@ -339,14 +398,35 @@ export const Contact = () => {
                         }}
                       />
                     </Grid>
+                    {status === "success" && (
+                      <Grid size={{ xs: 12 }}>
+                        <Typography sx={{ color: "primary.main" }}>
+                          Merci! Votre message a bien été envoyé, nous vous
+                          répondrons rapidement.
+                        </Typography>
+                      </Grid>
+                    )}
+                    {status === "error" && (
+                      <Grid size={{ xs: 12 }}>
+                        <Typography sx={{ color: "error.main" }}>
+                          Une erreur est survenue, merci de réessayer dans
+                          quelques instants.
+                        </Typography>
+                      </Grid>
+                    )}
+
                     <Grid size={{ xs: 12 }}>
                       <SubmitButton
                         fullWidth
                         type="submit"
                         variant="contained"
                         size="large"
+                        disabled={status === "submitting"}
                       >
-                        Envoyer
+                        {status === "submitting"
+                          ? "Envoi en cours..."
+                          : "Envoyer"}
+                        {/* Envoyer */}
                       </SubmitButton>
                     </Grid>
                   </Grid>

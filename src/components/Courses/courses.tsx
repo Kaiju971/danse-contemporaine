@@ -50,13 +50,18 @@ export const Courses = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <Typography variant="h2" align="center" gutterBottom>
+          <Typography
+            variant="h2"
+            align="center"
+            gutterBottom
+            sx={{ color: "primary.main" }}
+          >
             NOS COURS
           </Typography>
           <Typography
             variant="body1"
             align="center"
-            sx={{ mb: 2, color: "primary.main", maxWidth: 600, mx: "auto" }}
+            sx={{ mb: 2, color: "text.primary", maxWidth: 600, mx: "auto" }}
           >
             Découvrez nos cours de danse pour bouger, vous renforcer et vous
             faire du bien dans une ambiance bienveillante et inspirante.

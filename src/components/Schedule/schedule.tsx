@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ScheduleContainer, ScheduleItem, DayCircle } from "./schedule.styled";
-import { Container, Typography, Box, Grid } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 
 const schedule = [
   { day: "Lundi", time: "18h-19h", course: "Contemporain Débutant" },
@@ -20,7 +20,12 @@ export const Schedule = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <Typography variant="h2" align="center" gutterBottom>
+          <Typography
+            variant="h2"
+            align="center"
+            gutterBottom
+            sx={{ color: "primary.main" }}
+          >
             PLANNING
           </Typography>
           <Typography
@@ -45,7 +50,7 @@ export const Schedule = () => {
                 <DayCircle>
                   <Typography variant="h6">{item.day.charAt(0)}</Typography>
                 </DayCircle>
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{ textAlign: "center" }}>
                   <Typography
                     variant="subtitle1"
                     sx={{

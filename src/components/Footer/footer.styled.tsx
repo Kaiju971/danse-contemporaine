@@ -17,14 +17,14 @@ export const FooterContainer = styled(Box)(({ theme }) => ({
 //   },
 // });
 export const FooterLink = styled(Link)(({ theme }) => ({
-  color: "#00ff88",          // Vert fluo comme ton thème
+  color: "text.secondary", // Vert fluo comme ton thème
   textDecoration: "none",
   transition: "all 0.3s ease",
   "&:hover": {
-    color: "#00e67a",        // Vert un peu plus clair au survol
+    color: "text.secondary", // Vert un peu plus clair au survol
     textDecoration: "underline",
   },
-  fontSize: "0.875rem",      // Taille légèrement réduite
+  fontSize: "0.875rem", // Taille légèrement réduite
 }));
 
 // Texte du Footer (pour les droits d'auteur)
