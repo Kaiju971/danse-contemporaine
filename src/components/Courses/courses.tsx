@@ -86,7 +86,7 @@ export const Courses = () => {
                     <CourseLevelChip label={course.level} size="small" />
                     <Typography
                       variant="h3"
-                      sx={{
+                      sx={{ fontSize : {xxs:10,xs:24,md:50,}
                        
                       }}
                       gutterBottom

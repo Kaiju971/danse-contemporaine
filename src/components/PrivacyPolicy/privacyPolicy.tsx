@@ -1,26 +1,64 @@
-import { Box, Typography, Container, Divider, Link } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Container,
+  Divider,
+  Link,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { useTheme } from "@mui/material/styles";
 
-export const PrivacyPolicy = () => {
+interface PrivacyPolicyProps {
+  onClose?: () => void; // ✅ Ajout pour fermer la modale
+}
+
+export const PrivacyPolicy = ({ onClose }: PrivacyPolicyProps) => {
+  const theme = useTheme();
+
   return (
     <Container
       maxWidth="md"
       sx={{
-        background: (theme) =>
+        position: "relative", // ✅ Nécessaire pour positionner le bouton de fermeture
+        background:
           theme.palette.mode === "dark"
-            ? "rgba(0, 0, 0, 0.2)"
-            : "rgba(255, 255, 255, 0.7)",
+            ? "rgba(0, 0, 0, 0.9)"
+            : "rgba(255, 255, 255, 0.95)",
         backdropFilter: "blur(10px)",
-        boxShadow: "none",
-        borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-        py: 6,
+        boxShadow: (theme) => theme.shadows[10],
+        borderRadius: 1,
+        p: 4,
+        color: theme.palette.text.primary,
       }}
     >
+      {/* ✅ Bouton de fermeture corrigé */}
+      <IconButton
+        onClick={onClose} // ✅ Appelle la fonction de fermeture
+        aria-label="Fermer"
+        sx={{
+          position: "absolute",
+          top: 8,
+          right: 8,
+          color: (theme) => theme.palette.text.primary,
+          background: (theme) => theme.palette.background.paper,
+          "&:hover": {
+            background: (theme) => theme.palette.action.hover,
+          },
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       <Typography
         variant="h3"
         component="h1"
         gutterBottom
         align="center"
-        sx={{ color: "#00ff88" }}
+        sx={{
+          color: "#00ff88",
+          mb: 3,
+          fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" },
+        }}
       >
         Politique de confidentialité
       </Typography>

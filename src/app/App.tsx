@@ -14,6 +14,7 @@ import { Footer } from "../components/Footer";
 import { CookieConsent } from "../components/CookieConsent";
 import { LegalNotice } from "../components/LegalNotice";
 import { PrivacyPolicy } from "../components/PrivacyPolicy"; // ✅ Crée ce composant si ce n'est pas fait
+import {css} from "@mui/material";
 
 export function App() {
   const [openLegalNotice, setOpenLegalNotice] = useState(false);
@@ -23,18 +24,26 @@ export function App() {
     <>
       {/* ✅ Ajoute ça en haut de ton app */}
       <GlobalStyles
-        styles={{
-          html: {
-            overflowX: "hidden", // Empêche le scroll horizontal sur toute la page
-            width: "100%",
-          },
-          body: {
-            overflowX: "hidden", // Double sécurité
-            width: "100%",
-            margin: 0,
-            padding: 0,
-          },
-        }}
+        styles={css`
+          html {
+            scroll-behavior: smooth;
+          }
+          #root,
+          body {
+            * {
+              font-family: "Digital-7", sans-serif;
+            }
+            margin: 0;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none; /* IE 10+ */
+            scrollbar-width: none; /* Firefox */
+            &::-webkit-scrollbar {
+              /* chrome based */
+              width: 0px;
+            }
+          }
+        `}
       />
       <Layout>
         <Home />
@@ -64,7 +73,10 @@ export function App() {
             },
           }}
         >
-          <LegalNotice onPrivacyClick={() => setOpenPrivacyPolicy(true)} />
+          <LegalNotice
+            onPrivacyClick={() => setOpenPrivacyPolicy(true)}
+            onClose={() => setOpenLegalNotice(false)}
+          />
         </Dialog>
 
         {/* Modale pour Politique de confidentialité */}
@@ -80,7 +92,7 @@ export function App() {
             },
           }}
         >
-          <PrivacyPolicy />
+          <PrivacyPolicy onClose={() => setOpenPrivacyPolicy(false)} />
         </Dialog>
       </Layout>
     </>
