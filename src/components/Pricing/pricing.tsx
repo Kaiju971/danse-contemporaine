@@ -52,7 +52,10 @@ export const Pricing = () => {
             variant="h2"
             align="center"
             gutterBottom
-            sx={{ color: "primary.main" }}
+            sx={{
+              color: "primary.main",
+              fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" },
+            }}
           >
             TARIFS
           </Typography>
@@ -65,7 +68,7 @@ export const Pricing = () => {
           </Typography>
         </motion.div>
 
-        <Grid container spacing={3} sx={{ mt: 2}}>
+        <Grid container spacing={3} sx={{ mt: 2 }}>
           {pricingOptions.map((option, index) => (
             <Grid size={{ xs: 12, sm: 6, lg: 3 }} key={option.id}>
               <motion.div
@@ -76,7 +79,11 @@ export const Pricing = () => {
                 whileHover={{ y: -5 }}
               >
                 <PricingCard isFeatured={option.isFeatured}>
-                  <Typography variant="h4" gutterBottom sx={{fontSize: "2rem"}}>
+                  <Typography
+                    variant="h4"
+                    gutterBottom
+                    sx={{ fontSize: "2rem" }}
+                  >
                     {option.type}
                   </Typography>
                   <Divider

@@ -32,7 +32,13 @@ export const About = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Typography variant="h3" gutterBottom>
+              <Typography
+                variant="h3"
+                gutterBottom
+                sx={{
+                  fontSize: { xs: "2.1rem", sm: "2.2rem", md: "2.5rem" }, // ✅ Taille réduite sur mobile (xs)
+                }}
+              >
                 L'ÉCOLE DE DANSE{" "}
                 <Box component="span" sx={{ color: "primary.main" }}>
                   CONTEMPORAINE

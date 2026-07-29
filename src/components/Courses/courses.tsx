@@ -54,7 +54,10 @@ export const Courses = () => {
             variant="h2"
             align="center"
             gutterBottom
-            sx={{ color: "primary.main" }}
+            sx={{
+              color: "primary.main",
+              fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" }
+            }}
           >
             NOS COURS
           </Typography>
@@ -83,7 +86,9 @@ export const Courses = () => {
                     <CourseLevelChip label={course.level} size="small" />
                     <Typography
                       variant="h3"
-                      sx={{ fontSize: "50px" }}
+                      sx={{
+                       
+                      }}
                       gutterBottom
                     >
                       {course.title}

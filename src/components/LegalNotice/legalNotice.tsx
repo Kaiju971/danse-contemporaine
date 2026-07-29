@@ -284,6 +284,7 @@ export const LegalNotice = ({ onPrivacyClick }: LegalNoticeProps) => {
       >
         Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
       </Typography>
+      
     </Container>
   );
 };

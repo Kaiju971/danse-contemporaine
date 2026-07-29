@@ -73,7 +73,10 @@ export const Teachers = () => {
             variant="h2"
             align="center"
             gutterBottom
-            sx={{ color: "primary.main" }}
+            sx={{
+              color: "primary.main",
+              fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" },
+            }}
           >
             NOS PROFESSEURS
           </Typography>

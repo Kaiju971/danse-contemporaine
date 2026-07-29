@@ -31,6 +31,7 @@ export const InfoIcon = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   flexShrink: 0,
+
 }));
 
 export const FormPaper = styled(Paper)(({ theme }) => ({

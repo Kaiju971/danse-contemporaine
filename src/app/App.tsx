@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GlobalStyles } from "@mui/material";
 import { Dialog } from "@mui/material"; // ✅ Ajoute cet import
 import { Layout } from "../components/Layout";
 import { Home } from "../components/Home";
@@ -19,52 +20,69 @@ export function App() {
   const [openPrivacyPolicy, setOpenPrivacyPolicy] = useState(false);
 
   return (
-    <Layout>
-      <Home />
-      <About />
-      <Courses />
-      <Teachers />
-      <Gallery />
-      <Schedule />
-      <Pricing />
-      <Contact />
-      <Footer
-        onLegalNoticeClick={() => setOpenLegalNotice(true)}
-        onPrivacyClick={() => setOpenPrivacyPolicy(true)}
+    <>
+      {/* ✅ Ajoute ça en haut de ton app */}
+      <GlobalStyles
+        styles={{
+          html: {
+            overflowX: "hidden", // Empêche le scroll horizontal sur toute la page
+            width: "100%",
+          },
+          body: {
+            overflowX: "hidden", // Double sécurité
+            width: "100%",
+            margin: 0,
+            padding: 0,
+          },
+        }}
       />
-      <CookieConsent />
+      <Layout>
+        <Home />
+        <About />
+        <Courses />
+        <Teachers />
+        <Gallery />
+        <Schedule />
+        <Pricing />
+        <Contact />
+        <Footer
+          onLegalNoticeClick={() => setOpenLegalNotice(true)}
+          onPrivacyClick={() => setOpenPrivacyPolicy(true)}
+        />
+        <CookieConsent />
 
-      {/* Modale pour Mentions légales */}
-      <Dialog
-        open={openLegalNotice}
-        onClose={() => setOpenLegalNotice(false)}
-        fullWidth
-        maxWidth="md"
-        sx={{
-          "& .MuiPaper-root": {
-            background: "rgba(0, 0, 0, 0.95)",
-            color: "white",
-          },
-        }}
-      >
-        <LegalNotice onPrivacyClick={() => setOpenPrivacyPolicy(true)} />
-      </Dialog>
+        {/* Modale pour Mentions légales */}
+        <Dialog
+          open={openLegalNotice}
+          onClose={() => setOpenLegalNotice(false)}
+          fullWidth
+          maxWidth="md"
+          sx={{
+            "& .MuiPaper-root": {
+              background: "rgba(0, 0, 0, 0.95)",
+              color: "white",
+            },
+          }}
+        >
+          <LegalNotice onPrivacyClick={() => setOpenPrivacyPolicy(true)} />
+        </Dialog>
 
-      {/* Modale pour Politique de confidentialité */}
-      <Dialog
-        open={openPrivacyPolicy}
-        onClose={() => setOpenPrivacyPolicy(false)}
-        fullWidth
-        maxWidth="md"
-        sx={{
-          "& .MuiPaper-root": {
-            background: "rgba(0, 0, 0, 0.95)",
-            color: "white",
-          },
-        }}
-      >
-        <PrivacyPolicy />
-      </Dialog>
-    </Layout>
+        {/* Modale pour Politique de confidentialité */}
+        <Dialog
+          open={openPrivacyPolicy}
+          onClose={() => setOpenPrivacyPolicy(false)}
+          fullWidth
+          maxWidth="md"
+          sx={{
+            "& .MuiPaper-root": {
+              background: "rgba(0, 0, 0, 0.95)",
+              color: "white",
+            },
+          }}
+        >
+          <PrivacyPolicy />
+        </Dialog>
+      </Layout>
+    </>
   );
 }

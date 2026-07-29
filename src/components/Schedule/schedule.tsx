@@ -24,7 +24,10 @@ export const Schedule = () => {
             variant="h2"
             align="center"
             gutterBottom
-            sx={{ color: "primary.main" }}
+            sx={{
+              color: "primary.main",
+              fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" }
+            }}
           >
             PLANNING
           </Typography>
@@ -78,10 +81,10 @@ export const Schedule = () => {
                 </Typography>
                 <Box
                   component="button"
-                  sx={{
+                  sx={{ fontSize: {xxs:"0.5rem", xs: "1.3rem", md: "1rem" },
                     color: "primary.main",
                     fontWeight: 600,
-                    ml: 2,
+                    ml: 6,
                     background: "none",
                     border: "none",
                     cursor: "pointer",

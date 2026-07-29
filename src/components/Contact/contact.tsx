@@ -103,7 +103,10 @@ export const Contact = () => {
             variant="h2"
             align="center"
             gutterBottom
-            sx={{ color: "primary.main" }}
+            sx={{
+              color: "primary.main",
+              fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" },
+            }}
           >
             CONTACT
           </Typography>
@@ -194,13 +197,14 @@ export const Contact = () => {
                 <Typography variant="h4" gutterBottom>
                   Réseaux sociaux
                 </Typography>
-                <Box sx={{ display: "flex", gap: 2 }}>
+                <Box sx={{ display: "flex" }}>
                   {socialLinks.map((social) => (
                     <IconButton
                       key={social.name}
                       component={Link}
                       href={social.url}
                       sx={{
+                        
                         background: "rgba(255, 255, 255, 0.1)",
                         "&:hover": {
                           background: "rgba(0, 255, 136, 0.2)",

@@ -79,7 +79,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            px: { xs: 1.5, sm: 2 },
+            px: {xxs:"0.5", xs: 1.5, sm: 2 },
           }}
         >
           <Typography
@@ -90,7 +90,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               cursor: "pointer",
               minWidth: 0,
               whiteSpace: "nowrap",
-              fontSize: { xs: "1rem", sm: "1.25rem" },
+              fontSize: {xxs:"0.5", xs: "1rem", sm: "1.25rem" },
+             
             }}
             onClick={() => scrollToSection("home")}
           >
@@ -107,14 +108,14 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               display: "flex",
               alignItems: "center",
               gap: isMobile ? 1 : 3,
-              flexShrink: 0,
+              flexShrink: 0, 
             }}
           >
             {!isMobile &&
               navItems.map((item) => (
                 <Typography
                   key={item.id}
-                  sx={{
+                  sx={{ 
                     cursor: "pointer",
                     color: "text.secondary",
                     "&:hover": { color: "primary.main" },
@@ -125,14 +126,15 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Typography>
               ))}
 
-            {!isMobile && <ThemeToggleButton/>}
+            {!isMobile && <ThemeToggleButton />}
 
             {isMobile && (
               <IconButton
                 color="inherit"
                 aria-label="Ouvrir le menu"
                 onClick={() => setMobileOpen(true)}
-                sx={{marginRight:"1rem"}}
+                
+                // sx={{marginRight:"1rem" }}
               >
                 <MenuIcon />
               </IconButton>

@@ -61,20 +61,21 @@ export const Home = () => {
             variant="h1"
             align="center"
             gutterBottom
-            sx={{ fontSize: { xs: "3rem", md: "5rem" } }}
+            sx={{ fontSize: { xxs:"0.5rem",xs: "2.5rem", md: "5rem" } }}
           >
             COURS DE DANSE
           </Typography>
           <Typography
             variant="h1"
             align="center"
-            sx={{ color: "primary.main", fontSize: { xs: "4rem", md: "6rem" } }}
+            sx={{ color: "primary.main", fontSize: {xxs:"0.5rem", xs: "2rem", md: "6rem" } }}
           >
             CONTEMPORAINE
           </Typography>
           <Typography
             variant="h5"
             align="center"
+            
             sx={{
               color: "primary.main",
               mt: 4,
@@ -83,7 +84,7 @@ export const Home = () => {
               mx: "auto",
             }}
           >
-            Danse contemporaine est accessible à toutes. Fondée par Pascale,
+            Danse contemporaine est accessible à tous. Fondée par Pascale,
             c'est une école pleine d'énergie et de bienveillance.
           </Typography>
           <Box
