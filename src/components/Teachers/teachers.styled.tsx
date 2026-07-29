@@ -19,8 +19,9 @@ export const TeachersCircleContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const TeacherCard = styled(Card)(({ theme }) => ({
-  width: 160,
-  height: 160,
+  width: 250,
+  height: 250,
+  marginTop:'-2rem',
   borderRadius: "50%",
   overflow: "hidden",
   position: "absolute",

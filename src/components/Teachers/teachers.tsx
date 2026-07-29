@@ -351,7 +351,7 @@ export const Teachers = () => {
             position: "absolute",
             width: "100%",
             height: "60vh",
-            minHeight: "500px",
+            minHeight: "400px",
             maxHeight: "800px",
           },
         }}
