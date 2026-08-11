@@ -399,7 +399,7 @@ export const Teachers = () => {
                   {hoveredTeacher === teacher.id && (
                     <Spotlight
                       style={{
-                        x: "-20%",
+                        x: "-5%",
                         rotate: tilt,
                         transformOrigin: "50% 100%",
                       }}
