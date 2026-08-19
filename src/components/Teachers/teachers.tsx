@@ -17,10 +17,12 @@
 //   Button,
 //   CardContent,
 //   Divider,
+//   useMediaQuery,
+//   useTheme,
 // } from "@mui/material";
-// import image1 from "../../assets/image/Ellipse 2.png";
-// import image2 from "../../assets/image/Ellipse 3.png";
-// import image3 from "../../assets/image/Ellipse 4.png";
+// import image1 from "../../assets/image/Ellipse 2.webp";
+// import image2 from "../../assets/image/Ellipse 3.webp";
+// import image3 from "../../assets/image/Ellipse 4.webp";
 
 // const teachers = [
 //   {
@@ -30,7 +32,7 @@
 //     description:
 //       "Wendy transforme nos idées en actions concrètes. Son écoute attentive et sa précision font rayonner notre vision.",
 //     image: image2,
-//     position: { x: 62, y: 18 }, // en haut à droite
+//     position: { x: 62, y: 18 },
 //   },
 //   {
 //     id: 2,
@@ -39,7 +41,7 @@
 //     description:
 //       "Fondée par Pascale, Danse contemporaine est une école pleine d'énergie et de bienveillance.",
 //     image: image3,
-//     position: { x: 42, y: 60 }, // au milieu, en bas
+//     position: { x: 43, y: 60 },
 //   },
 //   {
 //     id: 3,
@@ -48,16 +50,16 @@
 //     description:
 //       "Spécialiste des cours pour enfants, Anne-Sophie allie créativité et pédagogie pour éveiller la passion de la danse.",
 //     image: image1,
-//     position: { x: 20, y: 18 }, // en haut à gauche
+//     position: { x: 20, y: 18 },
 //   },
 // ];
 
 // export const Teachers = () => {
 //   const [selectedTeacher, setSelectedTeacher] = useState<number | null>(null);
 //   const [hoveredTeacher, setHoveredTeacher] = useState<number | null>(null);
+//   const theme = useTheme();
+//   const isMobile = useMediaQuery(theme.breakpoints.down("md")); // ✅ Détecte mobile/tablette
 
-//   // On récupère le prof sélectionné une seule fois, au lieu de refaire
-//   // teachers.find(...) à chaque endroit où on en a besoin.
 //   const activeTeacher = teachers.find((t) => t.id === selectedTeacher);
 
 //   return (
@@ -75,7 +77,11 @@
 //             gutterBottom
 //             sx={{
 //               color: "primary.main",
-//               fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" },
+//               fontSize: { xs: "2rem", md: "3rem", lg: "4rem" }, // ✅ Taille responsive
+//               // Si une carte est survolée, on réduit l'opacité et on ajoute un léger flou
+//               opacity: hoveredTeacher !== null ? 0.3 : 1,
+//               filter: hoveredTeacher !== null ? "blur(1px)" : "none",
+//               transition: "opacity 0.3s ease, filter 0.3s ease",
 //             }}
 //           >
 //             NOS PROFESSEURS
@@ -83,24 +89,55 @@
 //           <Typography
 //             variant="body1"
 //             align="center"
-//             sx={{ mb: 2, color: "text.secondary" }}
+//             sx={{
+//               mb: 4,
+//               color: "text.secondary",
+//               opacity: hoveredTeacher !== null ? 0.3 : 1,
+//               transition: "opacity 0.3s ease",
+//             }}
 //           >
 //             Rencontrez notre équipe passionnée et diplômée, prête à vous
 //             accompagner dans votre parcours artistique.
 //           </Typography>
 //         </motion.div>
 //       </Container>
-//       <TeachersCircleContainer>
+
+//       {/* ✅ Layout différent pour mobile/tablette */}
+//       <TeachersCircleContainer
+//         sx={{
+//           // Sur mobile : affiche en grille
+//           [theme.breakpoints.down("md")]: {
+//             display: "grid",
+//             gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
+//             gap: 35,
+//             justifyItems: "center",
+//             position: "relative",
+//             height: "100%",
+//             paddingBottom: 27,
+//             marginLeft: "1.3rem",
+//           },
+//           // Sur desktop : garde le cercle
+//           [theme.breakpoints.up("md")]: {
+//             position: "absolute",
+//             width: "100%",
+//             height: "60vh",
+//             minHeight: "400px",
+//             maxHeight: "800px",
+//           },
+//         }}
+//       >
 //         {teachers.map((teacher, index) => {
 //           const { x, y } = teacher.position;
 
-//           // Inclinaison du faisceau selon la position horizontale :
-//           // penche vers la droite si la carte est à gauche du centre
-//           // (50%), vers la gauche si elle est à droite, et reste
-//           // parfaitement droit si elle est centrée (cas de Pascale).
+//           // Détecte si la carte actuelle est survolée ou si une AUTRE carte est survolée
+//           const isHovered = hoveredTeacher === teacher.id;
+//           const isAnyHovered = hoveredTeacher !== null;
+//           const isOtherHovered = isAnyHovered && !isHovered;
+
+//           // Calcul du tilt (uniquement pour desktop)
 //           const centerX = 50;
 //           const maxTilt = 25;
-//           const halfSpan = 100; // écart horizontal max attendu par rapport au centre
+//           const halfSpan = 100;
 //           const rawTilt = -maxTilt * ((x - centerX) / halfSpan);
 //           const tilt = Math.max(-maxTilt, Math.min(maxTilt, rawTilt));
 
@@ -112,31 +149,44 @@
 //               transition={{ duration: 0.6, delay: index * 0.2 }}
 //               viewport={{ once: true }}
 //               style={{
-//                 position: "absolute",
-//                 left: `${x}%`,
-//                 top: `${y}%`,
-//                 transform: "translate(-50%, -50%)",
+//                 zIndex: isHovered ? 10 : 1, // Passe la carte active au premier plan
+//                 // Positionnement différent selon mobile/desktop
+//                 ...(!isMobile
+//                   ? {
+//                       position: "absolute",
+//                       left: `${x}%`,
+//                       top: `${y}%`,
+//                       transform: "translate(-50%, -50%)",
+//                     }
+//                   : {
+//                       position: "relative",
+//                       width: "100%",
+//                       maxWidth: "300px",
+//                     }),
 //               }}
 //               onClick={() => setSelectedTeacher(teacher.id)}
-//               onMouseEnter={() => setHoveredTeacher(teacher.id)}
-//               onMouseLeave={() => setHoveredTeacher(null)}
-//               whileHover={{ scale: 1.05 }}
+//               onMouseEnter={() => !isMobile && setHoveredTeacher(teacher.id)} // ✅ Désactive hover sur mobile
+//               onMouseLeave={() => !isMobile && setHoveredTeacher(null)}
+//               whileHover={!isMobile ? { scale: 1.05 } : {}} // ✅ Désactive hover sur mobile
 //             >
-//               <AnimatePresence>
-//                 {hoveredTeacher === teacher.id && (
-//                   <Spotlight
-//                     style={{
-//                       x: "-20%",
-//                       rotate: tilt,
-//                       transformOrigin: "50% 100%",
-//                     }}
-//                     initial={{ opacity: 0 }}
-//                     animate={{ opacity: 1 }}
-//                     exit={{ opacity: 0 }}
-//                     transition={{ duration: 0.4 }}
-//                   />
-//                 )}
-//               </AnimatePresence>
+//               {/* Spotlight uniquement sur desktop */}
+//               {!isMobile && (
+//                 <AnimatePresence>
+//                   {isHovered && (
+//                     <Spotlight
+//                       style={{
+//                         x: "-5%",
+//                         rotate: tilt,
+//                         transformOrigin: "50% 100%",
+//                       }}
+//                       initial={{ opacity: 0 }}
+//                       animate={{ opacity: 1 }}
+//                       exit={{ opacity: 0 }}
+//                       transition={{ duration: 0.4 }}
+//                     />
+//                   )}
+//                 </AnimatePresence>
+//               )}
 
 //               <Box
 //                 sx={{
@@ -144,22 +194,37 @@
 //                   width: "100%",
 //                   height: "100%",
 //                   borderRadius: "50%",
-//                   // Voile blanc en dark (ressort sur fond navy), voile
-//                   // navy très léger en light (sinon invisible sur blanc).
 //                   background: (theme) =>
 //                     theme.palette.mode === "dark"
 //                       ? "conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.05) 360%)"
 //                       : "conic-gradient(from 0deg, transparent 0%, rgba(0,17,51,0.05) 360%)",
 //                   filter: "blur(20px)",
 //                   zIndex: -1,
+//                   opacity: isOtherHovered ? 0 : 1,
+//                   transition: "opacity 0.3s ease",
+//                   [theme.breakpoints.down("md")]: {
+//                     display: "none",
+//                   },
 //                 }}
 //               />
-//               <TeacherCard>
-//                 <img
-//                   src={teacher.image}
-//                   alt={teacher.name}
-//                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
-//                 />
+//               <TeacherCard
+//                 sx={{
+//                   // Si une AUTRE vignette est survolée : assombrit et désature cette vignette
+//                   opacity: isOtherHovered ? 0.35 : 1,
+//                   filter: isOtherHovered
+//                     ? "brightness(0.6) grayscale(30%)"
+//                     : "none",
+//                   transition: "all 0.3s ease",
+//                   [theme.breakpoints.down("md")]: {
+//                     width: "100%",
+//                     maxWidth: "250px",
+//                     height: "auto",
+//                     aspectRatio: "1/1",
+//                   },
+//                 }}
+//               >
+//                 <img src={teacher.image} alt={teacher.name} />
+
 //                 <TeacherCardContent>
 //                   <Typography variant="h6">{teacher.name}</Typography>
 //                   <Typography variant="caption">{teacher.role}</Typography>
@@ -169,6 +234,7 @@
 //           );
 //         })}
 
+//         {/* Modal (inchangée, déjà responsive) */}
 //         <Modal
 //           open={selectedTeacher !== null}
 //           onClose={() => setSelectedTeacher(null)}
@@ -183,7 +249,18 @@
 //             animate={{ opacity: 1, scale: 1 }}
 //           >
 //             {activeTeacher && (
-//               <ModalCard>
+//               <ModalCard
+//                 sx={{
+//                   // Modal plus large sur desktop
+//                   [theme.breakpoints.up("md")]: {
+//                     maxWidth: "600px",
+//                   },
+//                   [theme.breakpoints.down("md")]: {
+//                     maxWidth: "90vw",
+//                     margin: 2,
+//                   },
+//                 }}
+//               >
 //                 <CardContent sx={{ textAlign: "center", p: 4 }}>
 //                   <ModalImage>
 //                     <img
@@ -193,6 +270,7 @@
 //                         width: "100%",
 //                         height: "100%",
 //                         objectFit: "cover",
+//                         borderRadius: "50%",
 //                       }}
 //                     />
 //                   </ModalImage>
@@ -259,9 +337,9 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import image1 from "../../assets/image/Ellipse 2.png";
-import image2 from "../../assets/image/Ellipse 3.png";
-import image3 from "../../assets/image/Ellipse 4.png";
+import image1 from "../../assets/image/Ellipse 2.webp";
+import image2 from "../../assets/image/Ellipse 3.webp";
+import image3 from "../../assets/image/Ellipse 4.webp";
 
 const teachers = [
   {
@@ -297,18 +375,41 @@ export const Teachers = () => {
   const [selectedTeacher, setSelectedTeacher] = useState<number | null>(null);
   const [hoveredTeacher, setHoveredTeacher] = useState<number | null>(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // ✅ Détecte mobile/tablette
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // États d'assombrissement
+  const isModalOpen = selectedTeacher !== null;
+  const isAnyHovered = hoveredTeacher !== null;
+  const isDimmed = isAnyHovered || isModalOpen;
 
   const activeTeacher = teachers.find((t) => t.id === selectedTeacher);
 
   return (
     <TeachersContainer id="teachers">
-      <Container maxWidth="lg">
+      {/* Overlay sombre unifié pour le survol ET la modal */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.65)",
+          opacity: isDimmed ? 1 : 0,
+          pointerEvents: "none",
+          transition: "opacity 0.4s ease",
+          zIndex: 1,
+        }}
+      />
+
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
+          animate={{
+            opacity: isDimmed ? 0.25 : 1,
+            filter: isDimmed ? "blur(2px)" : "blur(0px)",
+          }}
+          style={{ transition: "all 0.4s ease" }}
         >
           <Typography
             variant="h2"
@@ -316,7 +417,7 @@ export const Teachers = () => {
             gutterBottom
             sx={{
               color: "primary.main",
-              fontSize: { xs: "2rem", md: "3rem", lg: "4rem" }, // ✅ Taille responsive
+              fontSize: { xs: "2rem", md: "3rem", lg: "4rem" },
             }}
           >
             NOS PROFESSEURS
@@ -324,7 +425,10 @@ export const Teachers = () => {
           <Typography
             variant="body1"
             align="center"
-            sx={{ mb: 4, color: "text.secondary" }}
+            sx={{
+              mb: 4,
+              color: "text.secondary",
+            }}
           >
             Rencontrez notre équipe passionnée et diplômée, prête à vous
             accompagner dans votre parcours artistique.
@@ -332,10 +436,10 @@ export const Teachers = () => {
         </motion.div>
       </Container>
 
-      {/* ✅ Layout différent pour mobile/tablette */}
       <TeachersCircleContainer
         sx={{
-          // Sur mobile : affiche en grille
+          zIndex: 2,
+          // Layout responsive
           [theme.breakpoints.down("md")]: {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
@@ -344,9 +448,8 @@ export const Teachers = () => {
             position: "relative",
             height: "100%",
             paddingBottom: 27,
-             marginLeft:"1.3rem",
+            marginLeft: "1.3rem",
           },
-          // Sur desktop : garde le cercle
           [theme.breakpoints.up("md")]: {
             position: "absolute",
             width: "100%",
@@ -359,7 +462,10 @@ export const Teachers = () => {
         {teachers.map((teacher, index) => {
           const { x, y } = teacher.position;
 
-          // Calcul du tilt (uniquement pour desktop)
+          const isHovered = hoveredTeacher === teacher.id;
+          const isOtherHovered = isAnyHovered && !isHovered;
+
+          // Calcul du tilt pour desktop
           const centerX = 50;
           const maxTilt = 25;
           const halfSpan = 100;
@@ -374,7 +480,7 @@ export const Teachers = () => {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
               style={{
-                // Positionnement différent selon mobile/desktop
+                zIndex: isHovered && !isModalOpen ? 10 : 2,
                 ...(!isMobile
                   ? {
                       position: "absolute",
@@ -389,14 +495,14 @@ export const Teachers = () => {
                     }),
               }}
               onClick={() => setSelectedTeacher(teacher.id)}
-              onMouseEnter={() => !isMobile && setHoveredTeacher(teacher.id)} // ✅ Désactive hover sur mobile
+              onMouseEnter={() => !isMobile && setHoveredTeacher(teacher.id)}
               onMouseLeave={() => !isMobile && setHoveredTeacher(null)}
-              whileHover={!isMobile ? { scale: 1.05 } : {}} // ✅ Désactive hover sur mobile
+              whileHover={!isMobile ? { scale: 1.05 } : {}}
             >
-              {/* Spotlight uniquement sur desktop */}
+              {/* Spotlight uniquement sur desktop si la modal n'est pas ouverte */}
               {!isMobile && (
                 <AnimatePresence>
-                  {hoveredTeacher === teacher.id && (
+                  {isHovered && !isModalOpen && (
                     <Spotlight
                       style={{
                         x: "-5%",
@@ -424,7 +530,8 @@ export const Teachers = () => {
                       : "conic-gradient(from 0deg, transparent 0%, rgba(0,17,51,0.05) 360%)",
                   filter: "blur(20px)",
                   zIndex: -1,
-                  // Sur mobile : désactive l'effet de flou (inutile)
+                  opacity: isDimmed ? 0 : 1,
+                  transition: "opacity 0.3s ease",
                   [theme.breakpoints.down("md")]: {
                     display: "none",
                   },
@@ -432,7 +539,13 @@ export const Teachers = () => {
               />
               <TeacherCard
                 sx={{
-                  // Taille adaptée pour mobile
+                  // Gestion de l'opacité : tout s'estompe si modal ouverte ou autre carte survolée
+                  opacity: isModalOpen ? 0.2 : isOtherHovered ? 0.35 : 1,
+                  filter:
+                    isModalOpen || isOtherHovered
+                      ? "brightness(0.6) grayscale(20%)"
+                      : "none",
+                  transition: "all 0.4s ease",
                   [theme.breakpoints.down("md")]: {
                     width: "100%",
                     maxWidth: "250px",
@@ -441,16 +554,8 @@ export const Teachers = () => {
                   },
                 }}
               >
-                <img
-                  src={teacher.image}
-                  alt={teacher.name}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: "50%",
-                  }}
-                />
+                <img src={teacher.image} alt={teacher.name} />
+
                 <TeacherCardContent>
                   <Typography variant="h6">{teacher.name}</Typography>
                   <Typography variant="caption">{teacher.role}</Typography>
@@ -460,14 +565,22 @@ export const Teachers = () => {
           );
         })}
 
-        {/* Modal (inchangée, déjà responsive) */}
+        {/* Modal avec fond natif transparent pour laisser notre overlay géré */}
         <Modal
           open={selectedTeacher !== null}
           onClose={() => setSelectedTeacher(null)}
+          slotProps={{
+            backdrop: {
+              sx: {
+                backgroundColor: "transparent",
+              },
+            },
+          }}
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            zIndex: 1300,
           }}
         >
           <motion.div
@@ -477,7 +590,6 @@ export const Teachers = () => {
             {activeTeacher && (
               <ModalCard
                 sx={{
-                  // Modal plus large sur desktop
                   [theme.breakpoints.up("md")]: {
                     maxWidth: "600px",
                   },

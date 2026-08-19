@@ -10,6 +10,7 @@ export const TeachersContainer = styled(Box)(({ theme }) => ({
   overflow: "hidden",
 }));
 
+
 export const TeachersCircleContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   minHeight: "600px",
@@ -18,20 +19,68 @@ export const TeachersCircleContainer = styled(Box)(({ theme }) => ({
   justifyContent: "center",
 }));
 
+// export const TeacherCard = styled(Card)(({ theme }) => ({
+//   width: 250,
+//   height: 250,
+//   marginTop:'-2rem',
+//   borderRadius: "50%",
+//   overflow: "hidden",
+//   position: "absolute",
+//   cursor: "pointer",
+//   transition: "all 0.3s ease",
+//   border: `2px solid ${theme.palette.divider}`,
+//   "&:hover": {
+//     transform: "scale(1.1)",
+//     borderColor: theme.palette.primary.main,
+//     boxShadow: `0 0 25px rgba(0, 255, 136, 0.3)`,
+//   },
+// }));
+
 export const TeacherCard = styled(Card)(({ theme }) => ({
   width: 250,
   height: 250,
-  marginTop:'-2rem',
+  marginTop: "-2rem",
   borderRadius: "50%",
   overflow: "hidden",
   position: "absolute",
   cursor: "pointer",
-  transition: "all 0.3s ease",
-  border: `2px solid ${theme.palette.divider}`,
+  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+
+  // 1. Bordure nette et brillante (type story / profil Facebook)
+  border: `3px solid ${theme.palette.mode === "dark" ? "#00ff88" : "#ffffff"}`,
+
+  // 2. Ombre portée prononcée pour décoller la carte du fond du site
+  boxShadow: "0 12px 28px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15)",
+
+  // 3. Vignettage radial : assombrit les bords pour faire ressortir le centre (le visage)
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    inset: 0,
+    borderRadius: "50%",
+    background:
+      "radial-gradient(circle, transparent 50%, rgba(0,0,0,0.35) 100%)",
+    pointerEvents: "none",
+    zIndex: 1,
+  },
+
+  "& img": {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "50%",
+    // Boost de clarté et de saturation
+    filter: "contrast(1.1) brightness(1.03) saturate(1.1)",
+    transition: "transform 0.4s ease, filter 0.3s ease",
+  },
+
   "&:hover": {
-    transform: "scale(1.1)",
-    borderColor: theme.palette.primary.main,
-    boxShadow: `0 0 25px rgba(0, 255, 136, 0.3)`,
+    transform: "scale(1.06)",
+    boxShadow: "0 16px 32px rgba(0, 255, 136, 0.3)",
+    "& img": {
+      transform: "scale(1.05)",
+      filter: "contrast(1.15) brightness(1.05) saturate(1.15)",
+    },
   },
 }));
 
@@ -43,7 +92,7 @@ export const TeacherCardContent = styled(CardContent)(({ theme }) => ({
   bottom: 0,
   left: 0,
   right: 0,
-  background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)",
+  background: "linear-gradient(to top, rgba(0, 0, 0, 0.93) 0%, transparent 100%)",
   padding: theme.spacing(2),
   color: theme.palette.common.white,
   textAlign: "center",
