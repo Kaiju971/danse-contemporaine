@@ -2,6 +2,8 @@ import { styled } from "@mui/material/styles";
 import { Box, Card } from "@mui/material";
 
 export const GalleryContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  overflow: "hidden",
   minHeight: "100vh",
   background: theme.palette.background.default,
   padding: theme.spacing(8, 0),
@@ -13,7 +15,7 @@ export const GalleryImageCard = styled(Card)(({ theme }) => ({
   borderRadius: (theme.shape.borderRadius as number) * 2,
   transition: "all 0.3s ease",
   "&:hover": {
-    transform: "scale(1.05)",
+    // Le zoom est géré par Framer Motion dans Gallery.tsx
     "& .overlay": {
       opacity: 1,
     },
