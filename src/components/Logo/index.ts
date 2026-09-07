@@ -1,1 +1,1 @@
-export { LogoApp } from "./logoApp";
+export { default } from "./logoApp";

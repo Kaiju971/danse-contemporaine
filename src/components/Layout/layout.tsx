@@ -272,7 +272,7 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
-import { LogoApp } from "../../components/Logo";
+import  LogoApp  from "../../components/Logo/logoApp";
 import LOGO from "../../assets/image/LOGO-removebg-preview.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -361,10 +361,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             onClick={() => scrollToSection("home")}
           >
             {/* ✅ Logo avec inversion en dark mode */}
+            <LogoApp logo={LOGO} size={isCompact ? 60 : isMobile ? 70 : 80} />
             <Box
               component="img"
-              src={LOGO}
-              alt="CAMBALÉA"
+              // src={LOGO}
+              // alt="CAMBALÉA"
               sx={{
                 width: { xxs: "90px", xs: "110px", sm: "130px" },
                 height: "auto",
@@ -459,7 +460,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           {/* ✅ Logo aussi dans le Drawer mobile */}
           <Box
             component="img"
-            src={LOGO}
+             src={LOGO}
             alt="CAMBALÉA"
             onClick={() => scrollToSection("home")}
             sx={{
