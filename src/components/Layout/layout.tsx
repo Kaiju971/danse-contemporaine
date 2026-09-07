@@ -272,20 +272,20 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
-import  LogoApp  from "../../components/Logo/logoApp";
+import LogoApp from "../../components/Logo/logoApp"; // Adapte l'import selon qu'il s'agisse d'un export default ou nommé
 import LOGO from "../../assets/image/LOGO-removebg-preview.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";
 import YouTube from "@mui/icons-material/YouTube";
+import LinkedIn from "@mui/icons-material/LinkedIn";
+import X from "@mui/icons-material/X";
+import TikTok from "@mui/icons-material/MusicNote";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { ThemeToggleButton } from "../../theme/themeToggleButton";
 import { FooterText, FooterLink } from "../Footer/footer.styled";
-import LinkedIn from "@mui/icons-material/LinkedIn";
-import X from "@mui/icons-material/X";
-import TikTok from "@mui/icons-material/MusicNote";
 
 const navItems = [
   { id: "home", label: "Accueil" },
@@ -342,41 +342,20 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            px: { xxs: "0.5", xs: 1.5, sm: 2 },
+            px: { xxs: 0.5, xs: 1.5, sm: 2 },
           }}
         >
-          <Typography
-            variant="h6"
-            component="div"
+          <Box
             sx={{
-              textTransform: "uppercase",
-              fontWeight: 700,
               cursor: "pointer",
-              minWidth: 0,
-              whiteSpace: "nowrap",
-              fontSize: { xxs: "0.5", xs: "1rem", sm: "1.25rem" },
               display: "flex",
               alignItems: "center",
             }}
             onClick={() => scrollToSection("home")}
           >
-            {/* ✅ Logo avec inversion en dark mode */}
+            {/* Logo principal */}
             <LogoApp logo={LOGO} size={isCompact ? 60 : isMobile ? 70 : 80} />
-            <Box
-              component="img"
-              // src={LOGO}
-              // alt="CAMBALÉA"
-              sx={{
-                width: { xxs: "90px", xs: "110px", sm: "130px" },
-                height: "auto",
-                filter:
-                  theme.palette.mode === "dark"
-                    ? "invert(1) brightness(1.2)"
-                    : "none",
-                transition: "filter 0.3s ease",
-              }}
-            />
-          </Typography>
+          </Box>
 
           <Box
             sx={{
@@ -457,24 +436,18 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             </IconButton>
           </Box>
 
-          {/* ✅ Logo aussi dans le Drawer mobile */}
+          {/* Logo dans le Drawer */}
           <Box
-            component="img"
-             src={LOGO}
-            alt="CAMBALÉA"
             onClick={() => scrollToSection("home")}
             sx={{
-              width: "120px",
-              height: "auto",
-              margin: "0 auto 16px",
+              display: "flex",
+              justifyContent: "center",
+              my: 2,
               cursor: "pointer",
-              filter:
-                theme.palette.mode === "dark"
-                  ? "invert(1) brightness(1.2)"
-                  : "none",
-              transition: "filter 0.3s ease",
             }}
-          />
+          >
+            <LogoApp logo={LOGO} size={100} />
+          </Box>
 
           <Divider />
 
@@ -510,7 +483,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           </Box>
 
           <FooterText variant="body2" align="center" sx={{ mt: 1 }}>
-            © {new Date().getFullYear()} Danse Contemporaine. Tous droits
+            © {new Date().getFullYear()} Cambaléa. Tous droits
             réservés.{" "}
             <FooterLink href="/mentions-legales">Mentions légales</FooterLink>
             {" - "}

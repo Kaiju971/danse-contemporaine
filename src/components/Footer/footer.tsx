@@ -18,7 +18,7 @@ export const Footer = ({ onLegalNoticeClick, onPrivacyClick }: FooterProps) => {
     >
       <FooterContainer>
         <FooterText variant="body2" align="center" sx={{ mt: 4 }}>
-          © {new Date().getFullYear()} Danse Contemporaine. Tous droits
+          © {new Date().getFullYear()} Cambaléa. Tous droits
           réservés.{" "}
           <FooterLink
             href="#"

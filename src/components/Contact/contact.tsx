@@ -181,7 +181,7 @@ export const Contact = () => {
                     >
                       Email
                     </Typography>
-                    <Typography>contact@danse-contemporaine.fr</Typography>
+                    <Typography>contact@cambalea.fr</Typography>
                   </Box>
                 </InfoItem>
               </InfoCard>
