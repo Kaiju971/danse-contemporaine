@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import {
   TeachersContainer,
   TeachersCircleContainer,
@@ -59,33 +59,28 @@ export const Teachers = () => {
   const [hoveredTeacher, setHoveredTeacher] = useState<number | null>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const canHover = useMediaQuery("(hover: hover)");
 
-  // États d'assombrissement
   const isModalOpen = selectedTeacher !== null;
   const isAnyHovered = hoveredTeacher !== null;
   const isDimmed = isAnyHovered || isModalOpen;
 
   const activeTeacher = teachers.find((t) => t.id === selectedTeacher);
 
-  // Gestion intelligente du clic / tap sur carte
   const handleCardClick = (id: number) => {
     if (isMobile) {
       if (hoveredTeacher === id) {
-        // 2ème appui : Ouvre la modal
         setSelectedTeacher(id);
       } else {
-        // 1er appui : Active le focus
         setHoveredTeacher(id);
       }
     } else {
-      // Sur Desktop : Ouverture directe de la modal
       setSelectedTeacher(id);
     }
   };
 
   return (
     <TeachersContainer id="teachers">
-      {/* Overlay sombre unifié (cliquable sur mobile pour fermer le focus) */}
       <Box
         onClick={() => isMobile && setHoveredTeacher(null)}
         sx={{
@@ -94,23 +89,19 @@ export const Teachers = () => {
           backgroundColor: "rgba(0, 0, 0, 0.65)",
           opacity: isDimmed ? 1 : 0,
           pointerEvents: isDimmed ? "auto" : "none",
-          transition: "opacity 0.4s ease",
+          transition: "opacity 0.3s ease",
           zIndex: 1,
-          cursor: isMobile && isAnyHovered ? "pointer" : "default",
         }}
       />
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-        <motion.div
+        {/* 🟢 'm' + viewport once pour tuer l'observer après animation */}
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          animate={{
-            opacity: isDimmed ? 0.25 : 1,
-            filter: isDimmed ? "blur(2px)" : "blur(0px)",
-          }}
-          style={{ transition: "all 0.4s ease" }}
+          animate={{ opacity: isDimmed ? 0.3 : 1 }}
         >
           <Typography
             variant="h2"
@@ -134,7 +125,7 @@ export const Teachers = () => {
             Rencontrez notre équipe passionnée et diplômée, prête à vous
             accompagner dans votre parcours artistique.
           </Typography>
-        </motion.div>
+        </m.div>
       </Container>
 
       <TeachersCircleContainer
@@ -148,10 +139,9 @@ export const Teachers = () => {
             position: "relative",
             height: "100%",
             paddingBottom: 27,
-            marginLeft: "1.3rem",
           },
           [theme.breakpoints.up("md")]: {
-            position: "absolute",
+            position: "relative",
             width: "100%",
             height: "60vh",
             minHeight: "400px",
@@ -172,11 +162,11 @@ export const Teachers = () => {
           const tilt = Math.max(-maxTilt, Math.min(maxTilt, rawTilt));
 
           return (
-            <motion.div
+            <m.div
               key={teacher.id}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
               viewport={{ once: true }}
               style={{
                 zIndex: isHovered && !isModalOpen ? 10 : 2,
@@ -194,11 +184,10 @@ export const Teachers = () => {
                     }),
               }}
               onClick={() => handleCardClick(teacher.id)}
-              onMouseEnter={() => !isMobile && setHoveredTeacher(teacher.id)}
-              onMouseLeave={() => !isMobile && setHoveredTeacher(null)}
-              whileHover={!isMobile ? { scale: 1.05 } : {}}
+              onMouseEnter={() => canHover && setHoveredTeacher(teacher.id)}
+              onMouseLeave={() => canHover && setHoveredTeacher(null)}
+              whileHover={canHover ? { scale: 1.05 } : {}}
             >
-              {/* Spotlight sur desktop uniquement */}
               {!isMobile && (
                 <AnimatePresence>
                   {isHovered && !isModalOpen && (
@@ -211,39 +200,16 @@ export const Teachers = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.4 }}
+                      transition={{ duration: 0.3 }}
                     />
                   )}
                 </AnimatePresence>
               )}
 
-              <Box
-                sx={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: "50%",
-                  background: (theme) =>
-                    theme.palette.mode === "dark"
-                      ? "conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.05) 360%)"
-                      : "conic-gradient(from 0deg, transparent 0%, rgba(0,17,51,0.05) 360%)",
-                  filter: "blur(20px)",
-                  zIndex: -1,
-                  opacity: isDimmed ? 0 : 1,
-                  transition: "opacity 0.3s ease",
-                  [theme.breakpoints.down("md")]: {
-                    display: "none",
-                  },
-                }}
-              />
               <TeacherCard
                 sx={{
                   opacity: isModalOpen ? 0.2 : isOtherHovered ? 0.35 : 1,
-                  filter:
-                    isModalOpen || isOtherHovered
-                      ? "brightness(0.6) grayscale(20%)"
-                      : "none",
-                  transition: "all 0.4s ease",
+                  transition: "opacity 0.3s ease",
                   [theme.breakpoints.down("md")]: {
                     width: "100%",
                     maxWidth: "250px",
@@ -252,28 +218,33 @@ export const Teachers = () => {
                   },
                 }}
               >
-                <img src={teacher.image} alt={teacher.name} />
+                {/* 🟢 Chargement lazy + décodage asynchrone des médias */}
+                <img
+                  src={teacher.image}
+                  alt={teacher.name}
+                  loading="lazy"
+                  decoding="async"
+                />
 
                 <TeacherCardContent>
                   <Typography variant="h6">{teacher.name}</Typography>
                   <Typography variant="caption">{teacher.role}</Typography>
                 </TeacherCardContent>
               </TeacherCard>
-            </motion.div>
+            </m.div>
           );
         })}
 
         <Modal
           open={selectedTeacher !== null}
+          disableScrollLock
           onClose={() => {
             setSelectedTeacher(null);
             if (isMobile) setHoveredTeacher(null);
           }}
           slotProps={{
             backdrop: {
-              sx: {
-                backgroundColor: "transparent",
-              },
+              sx: { backgroundColor: "transparent" },
             },
           }}
           sx={{
@@ -283,9 +254,10 @@ export const Teachers = () => {
             zIndex: 1300,
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+          <m.div
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
           >
             {activeTeacher && (
               <ModalCard
@@ -304,6 +276,8 @@ export const Teachers = () => {
                     <img
                       src={activeTeacher.image}
                       alt={activeTeacher.name}
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         width: "100%",
                         height: "100%",
@@ -317,20 +291,12 @@ export const Teachers = () => {
                   </Typography>
                   <Typography
                     variant="subtitle1"
-                    sx={{
-                      color: "primary.main",
-                      mb: 2,
-                    }}
+                    sx={{ color: "primary.main", mb: 2 }}
                   >
                     {activeTeacher.role}
                   </Typography>
                   <Divider sx={{ my: 2, borderColor: "divider" }} />
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: "text.secondary",
-                    }}
-                  >
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     {activeTeacher.description}
                   </Typography>
                   <Button
@@ -350,7 +316,7 @@ export const Teachers = () => {
                 </CardContent>
               </ModalCard>
             )}
-          </motion.div>
+          </m.div>
         </Modal>
       </TeachersCircleContainer>
     </TeachersContainer>

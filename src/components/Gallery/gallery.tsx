@@ -1,5 +1,5 @@
 // import { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
+// import { m, AnimatePresence } from "framer-motion";
 // import {
 //   GalleryContainer,
 //   GalleryImageCard,
@@ -13,6 +13,8 @@
 //   CardMedia,
 //   Modal,
 //   IconButton,
+//   useMediaQuery,
+//   useTheme,
 // } from "@mui/material";
 // import ZoomInIcon from "@mui/icons-material/ZoomIn";
 // import CloseIcon from "@mui/icons-material/Close";
@@ -44,38 +46,48 @@
 //   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 //   const [hoveredImage, setHoveredImage] = useState<number | null>(null);
 
-//   // États d'assombrissement identiques à Teachers
+//   const theme = useTheme();
+//   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+//   const canHover = useMediaQuery("(hover: hover)");
+
 //   const isModalOpen = selectedImage !== null;
 //   const isAnyHovered = hoveredImage !== null;
 //   const isDimmed = isAnyHovered || isModalOpen;
 
+//   const handleImageClick = (index: number) => {
+//     if (isMobile) {
+//       if (hoveredImage === index) {
+//         setSelectedImage(index);
+//       } else {
+//         setHoveredImage(index);
+//       }
+//     } else {
+//       setSelectedImage(index);
+//     }
+//   };
+
 //   return (
 //     <GalleryContainer id="gallery" sx={{ position: "relative" }}>
-//       {/* Overlay sombre unifié pour le survol ET la modal */}
 //       <Box
+//         onClick={() => isMobile && setHoveredImage(null)}
 //         sx={{
 //           position: "absolute",
 //           inset: 0,
-//           backgroundColor: "rgba(0, 0, 0, 0.729)",
+//           backgroundColor: "rgba(0, 0, 0, 0.65)",
 //           opacity: isDimmed ? 1 : 0,
 //           pointerEvents: "none",
-//           transition: "opacity 0.4s ease",
+//           transition: "opacity 0.3s ease",
 //           zIndex: 1,
 //         }}
 //       />
 
 //       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-//         {/* En-tête : s'estompe et se floute légèrement au survol / ouverture de modal */}
-//         <motion.div
+//         <m.div
 //           initial={{ opacity: 0 }}
 //           whileInView={{ opacity: 1 }}
-//           transition={{ duration: 0.6 }}
+//           transition={{ duration: 0.5 }}
 //           viewport={{ once: true }}
-//           animate={{
-//             opacity: isDimmed ? 0.25 : 1,
-//             filter: isDimmed ? "blur(2px)" : "blur(0px)",
-//           }}
-//           style={{ transition: "all 0.4s ease" }}
+//           animate={{ opacity: isDimmed ? 0.3 : 1 }}
 //         >
 //           <Typography
 //             variant="h2"
@@ -91,14 +103,11 @@
 //           <Typography
 //             variant="body1"
 //             align="center"
-//             sx={{
-//               color: "text.secondary",
-//               mb: 2,
-//             }}
+//             sx={{ color: "text.secondary", mb: 2 }}
 //           >
 //             Découvrez quelques moments forts de nos cours et spectacles.
 //           </Typography>
-//         </motion.div>
+//         </m.div>
 
 //         <Grid container spacing={3} sx={{ mt: 2 }}>
 //           {galleryImages.map((image, index) => {
@@ -107,38 +116,54 @@
 
 //             return (
 //               <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={index}>
-//                 <motion.div
-//                   initial={{ opacity: 0, scale: 0.9 }}
-//                   whileInView={{ opacity: 1, scale: 1 }}
-//                   transition={{ duration: 0.6, delay: index * 0.1 }}
-//                   viewport={{ once: true, margin: "-100px" }}
-//                   whileHover={{ scale: 1.03 }}
-//                   onClick={() => setSelectedImage(index)}
-//                   onMouseEnter={() => setHoveredImage(index)}
-//                   onMouseLeave={() => setHoveredImage(null)}
+//                 <m.div
+//                   initial={{ opacity: 0 }}
+//                   whileInView={{ opacity: 1 }}
+//                   transition={{
+//                     duration: 0.3,
+//                     delay: Math.min(index * 0.03, 0.3),
+//                   }}
+//                   viewport={{ once: true, margin: "-50px" }}
+//                   whileHover={canHover ? { scale: 1.03 } : {}}
+//                   onClick={() => handleImageClick(index)}
+//                   onMouseEnter={() => canHover && setHoveredImage(index)}
+//                   onMouseLeave={() => canHover && setHoveredImage(null)}
 //                   style={{
 //                     cursor: "pointer",
 //                     position: "relative",
-//                     // Fait passer l'image survolée au-dessus de l'overlay sombre (zIndex: 1)
 //                     zIndex: isHovered && !isModalOpen ? 10 : 2,
 //                   }}
+//                   // initial={{ opacity: 0, scale: 0.95 }}
+//                   // whileInView={{ opacity: 1, scale: 1 }}
+//                   // transition={{ duration: 0.5, delay: index * 0.05 }}
+//                   // viewport={{ once: true, margin: "-50px" }}
+//                   // whileHover={canHover ? { scale: 1.03 } : {}}
+//                   // onClick={() => handleImageClick(index)}
+//                   // onMouseEnter={() => canHover && setHoveredImage(index)}
+//                   // onMouseLeave={() => canHover && setHoveredImage(null)}
+//                   // style={{
+//                   //   cursor: "pointer",
+//                   //   position: "relative",
+//                   //   zIndex: isHovered && !isModalOpen ? 10 : 2,
+//                   // }}
 //                 >
 //                   <GalleryImageCard
 //                     sx={{
-//                       // Estompe et désature les cartes non sélectionnées/survolées
 //                       opacity: isModalOpen ? 0.2 : isOtherHovered ? 0.35 : 1,
-//                       filter:
-//                         isModalOpen || isOtherHovered
-//                           ? "brightness(0.6) grayscale(20%)"
-//                           : "none",
-//                       transition: "all 0.4s ease",
+//                       transition: "opacity 0.3s ease",
+//                       "& .overlay": {
+//                         opacity: isMobile && isHovered ? 1 : undefined,
+//                       },
 //                     }}
 //                   >
+//                     {/* 🟢 Optimisation de chargement sur CardMedia */}
 //                     <CardMedia
 //                       component="img"
 //                       height="300"
 //                       image={image}
 //                       alt={`Galerie ${index + 1}`}
+//                       loading="lazy"
+//                       decoding="async"
 //                       sx={{ objectFit: "cover" }}
 //                     />
 //                     <ImageOverlay className="overlay">
@@ -153,22 +178,23 @@
 //                       />
 //                     </ImageOverlay>
 //                   </GalleryImageCard>
-//                 </motion.div>
+//                 </m.div>
 //               </Grid>
 //             );
 //           })}
 //         </Grid>
 //       </Container>
 
-//       {/* Modal Lightbox avec fond natif transparent */}
 //       <Modal
 //         open={selectedImage !== null}
-//         onClose={() => setSelectedImage(null)}
+//         disableScrollLock
+//         onClose={() => {
+//           setSelectedImage(null);
+//           if (isMobile) setHoveredImage(null);
+//         }}
 //         slotProps={{
 //           backdrop: {
-//             sx: {
-//               backgroundColor: "transparent",
-//             },
+//             sx: { backgroundColor: "transparent" },
 //           },
 //         }}
 //         sx={{
@@ -181,12 +207,12 @@
 //       >
 //         <AnimatePresence>
 //           {selectedImage !== null && (
-//             <motion.div
+//             <m.div
 //               key="lightbox"
 //               initial={{ opacity: 0, scale: 0.85 }}
 //               animate={{ opacity: 1, scale: 1 }}
 //               exit={{ opacity: 0, scale: 0.85 }}
-//               transition={{ duration: 0.3 }}
+//               transition={{ duration: 0.2 }}
 //               style={{
 //                 position: "relative",
 //                 outline: "none",
@@ -196,7 +222,10 @@
 //               }}
 //             >
 //               <IconButton
-//                 onClick={() => setSelectedImage(null)}
+//                 onClick={() => {
+//                   setSelectedImage(null);
+//                   if (isMobile) setHoveredImage(null);
+//                 }}
 //                 aria-label="Fermer"
 //                 sx={{
 //                   position: "absolute",
@@ -219,6 +248,8 @@
 //                 component="img"
 //                 src={galleryImages[selectedImage]}
 //                 alt={`Galerie ${selectedImage + 1}`}
+//                 loading="eager"
+//                 decoding="async"
 //                 sx={{
 //                   display: "block",
 //                   maxWidth: "90vw",
@@ -227,15 +258,16 @@
 //                   boxShadow: "0 0 40px rgba(0, 0, 0, 0.5)",
 //                 }}
 //               />
-//             </motion.div>
+//             </m.div>
 //           )}
 //         </AnimatePresence>
 //       </Modal>
 //     </GalleryContainer>
 //   );
 // };
+
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import {
   GalleryContainer,
   GalleryImageCard,
@@ -243,17 +275,16 @@ import {
 } from "./gallery.styled";
 import {
   Container,
-  Grid,
   Typography,
   Box,
-  CardMedia,
   Modal,
   IconButton,
-  useMediaQuery,
-  useTheme,
+  Grid,
 } from "@mui/material";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import CloseIcon from "@mui/icons-material/Close";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import image1 from "../../assets/image/image1Gallery.webp";
 import image2 from "../../assets/image/image2Gallery.webp";
 import image3 from "../../assets/image/image3Gallery.webp";
@@ -279,59 +310,30 @@ const galleryImages = [
 ];
 
 export const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [hoveredImage, setHoveredImage] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
-  const isModalOpen = selectedImage !== null;
-  const isAnyHovered = hoveredImage !== null;
-  const isDimmed = isAnyHovered || isModalOpen;
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+  };
 
-  const handleImageClick = (index: number) => {
-    if (isMobile) {
-      if (hoveredImage === index) {
-        // 2ème appui : Ouvre la lightbox
-        setSelectedImage(index);
-      } else {
-        // 1er appui : Active le focus
-        setHoveredImage(index);
-      }
-    } else {
-      // Sur Desktop : Ouverture directe de la lightbox
-      setSelectedImage(index);
-    }
+  const handlePrev = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length,
+    );
   };
 
   return (
     <GalleryContainer id="gallery" sx={{ position: "relative" }}>
-      {/* Overlay sombre global */}
-      <Box
-        onClick={() => isMobile && setHoveredImage(null)}
-        sx={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.65)",
-          opacity: isDimmed ? 1 : 0,
-          pointerEvents: isDimmed ? "auto" : "none",
-          transition: "opacity 0.4s ease",
-          zIndex: 1,
-          cursor: isMobile && isAnyHovered ? "pointer" : "default",
-        }}
-      />
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          animate={{
-            opacity: isDimmed ? 0.25 : 1,
-            filter: isDimmed ? "blur(2px)" : "blur(0px)",
-          }}
-          style={{ transition: "all 0.4s ease" }}
         >
           <Typography
             variant="h2"
@@ -347,90 +349,60 @@ export const Gallery = () => {
           <Typography
             variant="body1"
             align="center"
-            sx={{
-              color: "text.secondary",
-              mb: 2,
-            }}
+            sx={{ color: "text.secondary", mb: 4 }}
           >
             Découvrez quelques moments forts de nos cours et spectacles.
           </Typography>
-        </motion.div>
+        </m.div>
 
-        <Grid container spacing={3} sx={{ mt: 2 }}>
-          {galleryImages.map((image, index) => {
-            const isHovered = hoveredImage === index;
-            const isOtherHovered = isAnyHovered && !isHovered;
-
-            return (
-              <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={index}>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  whileHover={!isMobile ? { scale: 1.03 } : {}}
-                  onClick={() => handleImageClick(index)}
-                  onMouseEnter={() => !isMobile && setHoveredImage(index)}
-                  onMouseLeave={() => !isMobile && setHoveredImage(null)}
-                  style={{
-                    cursor: "pointer",
-                    position: "relative",
-                    zIndex: isHovered && !isModalOpen ? 10 : 2,
+        {/* ✅ On n'affiche qu'UNE SEULE image (la première) */}
+        <Grid container sx={{ mt: 2, justifyContent: "center" }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6 }}>
+            <m.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02 }}
+              onClick={handleOpenModal}
+              style={{ cursor: "pointer" }}
+            >
+              <GalleryImageCard>
+                <Box
+                  component="img"
+                  src={galleryImages[0]}
+                  alt="Aperçu galerie"
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
                   }}
-                >
-                  <GalleryImageCard
+                />
+                <ImageOverlay className="gallery-overlay">
+                  <ZoomInIcon
                     sx={{
-                      opacity: isModalOpen ? 0.2 : isOtherHovered ? 0.35 : 1,
-                      filter:
-                        isModalOpen || isOtherHovered
-                          ? "brightness(0.6) grayscale(20%)"
-                          : "none",
-                      transition: "all 0.4s ease",
-                      // Sur mobile, affiche l'overlay (icône de loupe) dès que la carte est en focus
-                      "& .overlay": {
-                        opacity: isMobile && isHovered ? 1 : undefined,
-                      },
+                      fontSize: 40,
+                      color: (theme) =>
+                        theme.palette.mode === "dark"
+                          ? "common.white"
+                          : "primary.main",
                     }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="300"
-                      image={image}
-                      alt={`Galerie ${index + 1}`}
-                      sx={{ objectFit: "cover" }}
-                    />
-                    <ImageOverlay className="overlay">
-                      <ZoomInIcon
-                        sx={{
-                          fontSize: 40,
-                          color: (theme) =>
-                            theme.palette.mode === "dark"
-                              ? "common.white"
-                              : "primary.main",
-                        }}
-                      />
-                    </ImageOverlay>
-                  </GalleryImageCard>
-                </motion.div>
-              </Grid>
-            );
-          })}
+                  />
+                  <Typography variant="body2" sx={{ mt: 1, color: "white" }}>
+                    Voir la galerie ({galleryImages.length} photos)
+                  </Typography>
+                </ImageOverlay>
+              </GalleryImageCard>
+            </m.div>
+          </Grid>
         </Grid>
       </Container>
 
+      {/* ✅ MODALE LIGHTBOX : N'affiche qu'une seule image à la fois */}
       <Modal
-        open={selectedImage !== null}
-        onClose={() => {
-          setSelectedImage(null);
-          if (isMobile) setHoveredImage(null);
-        }}
-        slotProps={{
-          backdrop: {
-            sx: {
-              backgroundColor: "transparent",
-            },
-          },
-        }}
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        disableScrollLock
         sx={{
           display: "flex",
           alignItems: "center",
@@ -440,57 +412,96 @@ export const Gallery = () => {
         }}
       >
         <AnimatePresence>
-          {selectedImage !== null && (
-            <motion.div
-              key="lightbox"
+          {isModalOpen && (
+            <m.div
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
               style={{
                 position: "relative",
                 outline: "none",
                 maxWidth: "90vw",
                 maxHeight: "90vh",
-                zIndex: 1301,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
+              {/* Bouton Fermer */}
               <IconButton
-                onClick={() => {
-                  setSelectedImage(null);
-                  if (isMobile) setHoveredImage(null);
-                }}
+                onClick={handleCloseModal}
                 aria-label="Fermer"
                 sx={{
                   position: "absolute",
                   top: -48,
                   right: 0,
-                  color: (theme) =>
-                    theme.palette.mode === "dark"
-                      ? "common.white"
-                      : "primary.main",
+                  color: "common.white",
                   background: "rgba(255, 255, 255, 0.1)",
-                  "&:hover": {
-                    background: "rgba(255, 255, 255, 0.2)",
-                  },
+                  "&:hover": { background: "rgba(255, 255, 255, 0.2)" },
                 }}
               >
                 <CloseIcon />
               </IconButton>
 
+              {/* Bouton Précédent */}
+              <IconButton
+                onClick={handlePrev}
+                aria-label="Précédent"
+                sx={{
+                  position: "absolute",
+                  left: { xs: -20, sm: -60 },
+                  color: "common.white",
+                  background: "rgba(0, 255, 136, 0.2)",
+                  "&:hover": { background: "rgba(0, 255, 136, 0.4)" },
+                }}
+              >
+                <ChevronLeftIcon sx={{ fontSize: 40 }} />
+              </IconButton>
+
+              {/* Image courante */}
               <Box
                 component="img"
-                src={galleryImages[selectedImage]}
-                alt={`Galerie ${selectedImage + 1}`}
+                src={galleryImages[currentIndex]}
+                alt={`Galerie ${currentIndex + 1}`}
                 sx={{
                   display: "block",
                   maxWidth: "90vw",
-                  maxHeight: "90vh",
+                  maxHeight: "80vh",
                   borderRadius: 2,
                   boxShadow: "0 0 40px rgba(0, 0, 0, 0.5)",
                 }}
               />
-            </motion.div>
+
+              {/* Bouton Suivant */}
+              <IconButton
+                onClick={handleNext}
+                aria-label="Suivant"
+                sx={{
+                  position: "absolute",
+                  right: { xs: -20, sm: -60 },
+                  color: "common.white",
+                  background: "rgba(0, 255, 136, 0.2)",
+                  "&:hover": { background: "rgba(0, 255, 136, 0.4)" },
+                }}
+              >
+                <ChevronRightIcon sx={{ fontSize: 40 }} />
+              </IconButton>
+
+              {/* Compteur */}
+              <Typography
+                sx={{
+                  position: "absolute",
+                  bottom: -40,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  color: "common.white",
+                  fontSize: "0.9rem",
+                }}
+              >
+                {currentIndex + 1} / {galleryImages.length}
+              </Typography>
+            </m.div>
           )}
         </AnimatePresence>
       </Modal>

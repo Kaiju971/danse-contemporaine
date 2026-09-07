@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography, Card, CardMedia, CardContent } from "@mui/material";
+import { Box, Card, CardContent } from "@mui/material";
 import { motion } from "framer-motion";
 
 export const TeachersContainer = styled(Box)(({ theme }) => ({
@@ -7,9 +7,9 @@ export const TeachersContainer = styled(Box)(({ theme }) => ({
   background: theme.palette.background.paper,
   padding: theme.spacing(8, 0),
   position: "relative",
-  overflow: "hidden",
+  // 🟢 'clip' uniquement sur le conteneur principal de section
+  overflowX: "clip",
 }));
-
 
 export const TeachersCircleContainer = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -19,40 +19,21 @@ export const TeachersCircleContainer = styled(Box)(({ theme }) => ({
   justifyContent: "center",
 }));
 
-// export const TeacherCard = styled(Card)(({ theme }) => ({
-//   width: 250,
-//   height: 250,
-//   marginTop:'-2rem',
-//   borderRadius: "50%",
-//   overflow: "hidden",
-//   position: "absolute",
-//   cursor: "pointer",
-//   transition: "all 0.3s ease",
-//   border: `2px solid ${theme.palette.divider}`,
-//   "&:hover": {
-//     transform: "scale(1.1)",
-//     borderColor: theme.palette.primary.main,
-//     boxShadow: `0 0 25px rgba(0, 255, 136, 0.3)`,
-//   },
-// }));
-
 export const TeacherCard = styled(Card)(({ theme }) => ({
   width: 250,
   height: 250,
+  aspectRatio: "1 / 1", // 🟢 Réservation d'espace immédiate (anti Layout Shift)
   marginTop: "-2rem",
   borderRadius: "50%",
-  overflow: "hidden",
-  position: "absolute",
+  overflow: "hidden", // 🟢 Rognage circulaire propre
+  position: "relative",
   cursor: "pointer",
-  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+  transition:
+    "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
 
-  // 1. Bordure nette et brillante (type story / profil Facebook)
   border: `3px solid ${theme.palette.mode === "dark" ? "#00ff88" : "#ffffff"}`,
-
-  // 2. Ombre portée prononcée pour décoller la carte du fond du site
   boxShadow: "0 12px 28px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15)",
 
-  // 3. Vignettage radial : assombrit les bords pour faire ressortir le centre (le visage)
   "&::after": {
     content: '""',
     position: "absolute",
@@ -69,9 +50,8 @@ export const TeacherCard = styled(Card)(({ theme }) => ({
     height: "100%",
     objectFit: "cover",
     borderRadius: "50%",
-    // Boost de clarté et de saturation
     filter: "contrast(1.1) brightness(1.03) saturate(1.1)",
-    transition: "transform 0.4s ease, filter 0.3s ease",
+    transition: "transform 0.4s ease, filter 0.4s ease",
   },
 
   "&:hover": {
@@ -84,32 +64,23 @@ export const TeacherCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-// Dégradé de légende sur la photo : reste volontairement sombre + texte
-// blanc quel que soit le thème du site, car il doit contraster avec une
-// PHOTO (pas avec le fond de page).
 export const TeacherCardContent = styled(CardContent)(({ theme }) => ({
   position: "absolute",
   bottom: 0,
   left: 0,
   right: 0,
-  background: "linear-gradient(to top, rgba(0, 0, 0, 0.93) 0%, transparent 100%)",
+  background:
+    "linear-gradient(to top, rgba(0, 0, 0, 0.93) 0%, transparent 100%)",
   padding: theme.spacing(2),
   color: theme.palette.common.white,
   textAlign: "center",
+  pointerEvents: "none", // 🟢 Laisse traverser les événements de scroll
 }));
 
-// Faisceau de projecteur : cône fin en haut, large en bas, positionné
-// au-dessus de la carte (top négatif). pointerEvents "none" pour ne
-// jamais gêner le clic/survol de la carte en dessous.
-// Le décalage horizontal (x: "-50%") et la rotation sont passés au cas
-// par cas via la prop "style" dans Teachers.tsx, pour que framer-motion
-// gère lui-même la composition du transform (translation + rotation).
-// Blanc en dark (rayon de lumière classique) ; vert lime (couleur de
-// marque) en light, sinon un faisceau blanc est invisible sur fond clair.
 export const Spotlight = styled(motion.div)(({ theme }) => ({
   position: "absolute",
   top: -545,
-  left: "50%",
+  left: "10%",
   width: 260,
   height: 460,
   clipPath: "polygon(47% 0%, 53% 0%, 100% 100%, 0% 100%)",
@@ -134,8 +105,9 @@ export const ModalCard = styled(Card)(({ theme }) => ({
 export const ModalImage = styled(Box)(({ theme }) => ({
   width: 120,
   height: 120,
+  aspectRatio: "1 / 1",
   borderRadius: "50%",
-  overflow: "hidden",
+  overflow: "hidden", // 🟢 Rognage circulaire propre
   margin: "0 auto",
   border: `3px solid ${theme.palette.primary.main}`,
 }));

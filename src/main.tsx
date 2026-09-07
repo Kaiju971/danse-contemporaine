@@ -4,10 +4,15 @@ import { App } from "./app/App";
 import { ColorModeProvider } from "../src/theme/colorModeContext";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ColorModeProvider>
-      <App />
-    </ColorModeProvider>
-  </React.StrictMode>,
-);
+// 🟢 Initialisation propre du Root sans surcharger le thread principal
+const rootElement = document.getElementById("root");
+
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <ColorModeProvider>
+        <App />
+      </ColorModeProvider>
+    </React.StrictMode>,
+  );
+}
