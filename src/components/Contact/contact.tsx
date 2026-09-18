@@ -14,7 +14,7 @@ import {
   Typography,
   TextField,
   Box,
-  Link,
+  // Link,
   IconButton,
   MenuItem,
 } from "@mui/material";
@@ -32,12 +32,36 @@ import TikTok from "@mui/icons-material/MusicNote";
 // import Instagram from "..//../assets/image/instagram.png"
 
 const socialLinks = [
-  { name: "Facebook", icon: <Facebook />, url: "#" },
-  { name: "Instagram", icon: <Instagram />, url: "#" },
-  { name: "YouTube", icon: <YouTube />, url: "#" },
-  { name: "LinkedIn", icon: <LinkedIn />, url: "#" },
-  { name: "X", icon: <X />, url: "#" },
-  { name: "TikTok", icon: <TikTok />, url: "#" },
+  {
+    name: "Facebook",
+    icon: <Facebook />,
+    url: "https://www.facebook.com/cambalea",
+  },
+  {
+    name: "Instagram",
+    icon: <Instagram />,
+    url: "https://www.instagram.com/cambalea/",
+  },
+  {
+    name: "YouTube",
+    icon: <YouTube />,
+    url: "https://www.youtube.com/@cambalea",
+  },
+  {
+    name: "LinkedIn",
+    icon: <LinkedIn />,
+    url: "https://www.linkedin.com/company/cambalea/",
+  },
+  {
+    name: "X",
+    icon: <X />,
+    url: "https://x.com/cambalea",
+  },
+  {
+    name: "TikTok",
+    icon: <TikTok />,
+    url: "https://www.tiktok.com/@cambalea",
+  },
 ];
 
 //Encode un objet en x-form-urlencoded, seul format accepté par
@@ -201,10 +225,12 @@ export const Contact = () => {
                   {socialLinks.map((social) => (
                     <IconButton
                       key={social.name}
-                      component={Link}
+                      component="a"
                       href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visiter la page ${social.name} de Cambaléa`}
                       sx={{
-                        
                         background: "rgba(255, 255, 255, 0.1)",
                         "&:hover": {
                           background: "rgba(0, 255, 136, 0.2)",
@@ -213,6 +239,20 @@ export const Contact = () => {
                     >
                       {social.icon}
                     </IconButton>
+                    // <IconButton
+                    //   key={social.name}
+                    //   component={Link}
+                    //   href={social.url}
+                    //   sx={{
+
+                    //     background: "rgba(255, 255, 255, 0.1)",
+                    //     "&:hover": {
+                    //       background: "rgba(0, 255, 136, 0.2)",
+                    //     },
+                    //   }}
+                    // >
+                    //   {social.icon}
+                    // </IconButton>
                   ))}
                 </Box>
               </InfoCard>

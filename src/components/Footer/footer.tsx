@@ -52,3 +52,4 @@ export const Footer = ({ onLegalNoticeClick, onPrivacyClick }: FooterProps) => {
     </motion.div>
   );
 };
+

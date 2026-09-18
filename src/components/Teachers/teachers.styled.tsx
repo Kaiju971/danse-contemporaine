@@ -50,7 +50,7 @@ export const TeacherCard = styled(Card)(({ theme }) => ({
     height: "100%",
     objectFit: "cover",
     borderRadius: "50%",
-    filter: "contrast(1.1) brightness(1.03) saturate(1.1)",
+    // filter: "contrast(1.1) brightness(1.03) saturate(1.1)",
     transition: "transform 0.4s ease, filter 0.4s ease",
   },
 
@@ -59,7 +59,7 @@ export const TeacherCard = styled(Card)(({ theme }) => ({
     boxShadow: "0 16px 32px rgba(0, 255, 136, 0.3)",
     "& img": {
       transform: "scale(1.05)",
-      filter: "contrast(1.15) brightness(1.05) saturate(1.15)",
+      // filter: "contrast(1.15) brightness(1.05) saturate(1.15)",
     },
   },
 }));
@@ -77,21 +77,22 @@ export const TeacherCardContent = styled(CardContent)(({ theme }) => ({
   pointerEvents: "none", // 🟢 Laisse traverser les événements de scroll
 }));
 
-export const Spotlight = styled(motion.div)(({ theme }) => ({
-  position: "absolute",
-  top: -545,
-  left: "10%",
-  width: 260,
-  height: 460,
-  clipPath: "polygon(47% 0%, 53% 0%, 100% 100%, 0% 100%)",
-  background:
-    theme.palette.mode === "dark"
-      ? "linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.485) 55%, transparent 100%)"
-      : "linear-gradient(to bottom, rgba(0, 200, 100, 0.95) 0%, rgba(0, 200, 100, 0.4) 55%, transparent 100%)",
-  filter: "blur(4px)",
-  pointerEvents: "none",
-  zIndex: 0,
-}));
+// export const Spotlight = styled(motion.div)(({ theme }) => ({
+//   position: "absolute",
+//   top: -545,
+//   left: "10%",
+//   width: 260,
+//   height: 460,
+//   clipPath: "polygon(47% 0%, 53% 0%, 100% 100%, 0% 100%)",
+//   background:
+//     theme.palette.mode === "dark"
+//       ? "linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.485) 55%, transparent 100%)"
+//       : "linear-gradient(to bottom, rgba(0, 200, 100, 0.95) 0%, rgba(0, 200, 100, 0.4) 55%, transparent 100%)",
+//   // filter: "blur(4px)",
+//   pointerEvents: "none",
+//   zIndex: 0,
+// }));
+
 
 export const ModalCard = styled(Card)(({ theme }) => ({
   maxWidth: 400,

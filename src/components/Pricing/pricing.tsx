@@ -44,9 +44,11 @@ export const Pricing = () => {
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          // whileInView={{ opacity: 1 }}
+          // transition={{ duration: 0.6 }}
+          // viewport={{ once: true }}
+          animate={{ opacity: 1, scale: 1 }} // ✅ Pas de whileInView = pas de recalcul
+          viewport={{ once: true }} // ✅ Empêche les recalculs après la 1ère fois
         >
           <Typography
             variant="h2"
@@ -73,10 +75,12 @@ export const Pricing = () => {
             <Grid size={{ xs: 12, sm: 6, lg: 3 }} key={option.id}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
+                // whileInView={{ opacity: 1, y: 0 }}
+                // transition={{ duration: 0.6, delay: index * 0.1 }}
+                // viewport={{ once: true }}
+                // whileHover={{ y: -5 }}
+                animate={{ opacity: 1, scale: 1 }} // ✅ Pas de whileInView = pas de recalcul
+                viewport={{ once: true }} // ✅ Empêche les recalculs après la 1ère fois
               >
                 <PricingCard isFeatured={option.isFeatured}>
                   <Typography

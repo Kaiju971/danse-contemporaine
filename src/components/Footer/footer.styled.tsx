@@ -8,14 +8,6 @@ export const FooterContainer = styled(Box)(({ theme }) => ({
   borderTop: "1px solid rgba(255, 255, 255, 0.1)",
 }));
 
-// hover:text-[#00e67a] transition-colors + color #00ff88
-// export const FooterLink = styled(Link)({
-//   color: "#00ff88",
-//   transition: "color 0.3s ease",
-//   "&:hover": {
-//     color: "#00e67a",
-//   },
-// });
 export const FooterLink = styled(Link)(({ theme }) => ({
   color: "text.secondary", // Vert fluo comme ton thème
   textDecoration: "none",

@@ -143,6 +143,8 @@ import { GlobalStyles, Dialog } from "@mui/material";
 import { LazyMotion, domAnimation } from "framer-motion";
 import { preloadImages } from "../utils/preloadImages";
 import { LogoLoader } from "../components/LogoLoader";
+import { Teachers } from "../components/Teachers/teachers";
+import { Gallery } from "../components/Gallery/gallery";
 
 // 🟢 Composants critiques chargés immédiatement
 import { Layout } from "../components/Layout";
@@ -173,12 +175,12 @@ const About = lazy(() =>
 const Courses = lazy(() =>
   import("../components/Courses").then((m) => ({ default: m.Courses })),
 );
-const Teachers = lazy(() =>
-  import("../components/Teachers").then((m) => ({ default: m.Teachers })),
-);
-const Gallery = lazy(() =>
-  import("../components/Gallery").then((m) => ({ default: m.Gallery })),
-);
+// const Teachers = lazy(() =>
+//   import("../components/Teachers").then((m) => ({ default: m.Teachers })),
+// );
+// const Gallery = lazy(() =>
+//   import("../components/Gallery").then((m) => ({ default: m.Gallery })),
+// );
 const Schedule = lazy(() =>
   import("../components/Schedule").then((m) => ({ default: m.Schedule })),
 );
@@ -231,9 +233,21 @@ export function App() {
     ];
 
     // ✅ 2. Précharge TOUS les composants lourds en arrière-plan pendant le loader
-    const minDisplayTime = new Promise((resolve) => setTimeout(resolve, 1500));
+    const minDisplayTime = new Promise((resolve) => setTimeout(resolve, 2500));
 
-    Promise.all([preloadImages(criticalImages), minDisplayTime])
+    Promise.all([
+      preloadImages(criticalImages),
+      minDisplayTime,
+      // Force le navigateur à télécharger et préparer ces sections
+      import("../components/Teachers"),
+      import("../components/Gallery"),
+      import("../components/About"),
+      import("../components/Courses"),
+      import("../components/Schedule"),
+      import("../components/Pricing"),
+      import("../components/Contact"),
+      import("../components/Footer"),
+    ])
       .then(() => setIsLoading(false))
       .catch(() => setIsLoading(false));
   }, []);

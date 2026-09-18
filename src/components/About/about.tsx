@@ -36,17 +36,17 @@ export const About = () => {
                 variant="h3"
                 gutterBottom
                 sx={{
-                  fontSize: { xs: "2.1rem", sm: "2.2rem", md: "2.5rem" }, // ✅ Taille réduite sur mobile (xs)
+                  fontSize: { xs: "2.1rem", sm: "2.2rem", md: "2.3rem" }, // ✅ Taille réduite sur mobile (xs)
                 }}
               >
-                L'ÉCOLE DE DANSE{" "}
+                L'ATELIER CHORÉGRAPHIQUE{" "}
                 <Box component="span" sx={{ color: "primary.main" }}>
-                  CONTEMPORAINE
+                  CAMBALÉA
                 </Box>
               </Typography>
               <Typography variant="body1" sx={{ mb: 2 }}>
-                Fondée par Pascale, notre école est un lieu où la danse
-                contemporaine devient accessible à toutes et à tous.
+                Fondée par Pascale, notre atelier est un lieu où la danse
+                devient accessible à toutes et à tous.
               </Typography>
               <Typography variant="body1">
                 Nous croyons en une approche bienveillante et énergique, où

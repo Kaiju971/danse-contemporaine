@@ -128,9 +128,9 @@ export const Home = () => {
             variant="h1"
             align="center"
             gutterBottom
-            sx={{ fontSize: { xxs: "0.5rem", xs: "2.5rem", md: "5rem" } }}
+            sx={{ fontSize: { xxs: "0.5rem", xs: "2rem", md: "5rem" } }}
           >
-            COURS DE DANSE
+            ATELIER CHORÉGRAPHIQUE
           </Typography>
           <Typography
             variant="h1"
@@ -140,7 +140,7 @@ export const Home = () => {
               fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" },
             }}
           >
-            CONTEMPORAINE
+            CAMBALÉA
           </Typography>
           <Typography
             variant="h5"
@@ -153,8 +153,8 @@ export const Home = () => {
               mx: "auto",
             }}
           >
-            Danse contemporaine est accessible à tous. Fondée par Pascale, c'est
-            une école pleine d'énergie et de bienveillance.
+            CAMBALÉA est accessible à tous. Fondée par Pascale, c'est un atelier
+            de chorégraphie plein d'énergie et de bienveillance.
           </Typography>
           <Box
             sx={{
@@ -179,7 +179,7 @@ export const Home = () => {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              DÉCOUVRIR NOS COURS
+              DÉCOUVRIR NOS ATELIERS
             </Button>
             <Button
               variant="outlined"
