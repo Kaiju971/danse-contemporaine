@@ -314,7 +314,7 @@ export const PrivacyPolicy = ({ onClose }: PrivacyPolicyProps) => {
           href="mailto:contact@danse-contemporaine.fr"
           sx={{ color: "#00ff88" }}
         >
-          contact@danse-contemporaine.fr
+          cambalea94@gmail.com
         </Link>{" "}
         ou un courrier à l’adresse de l’association. Nous répondrons dans un
         délai d’<strong>1 mois</strong>.
@@ -445,11 +445,11 @@ export const PrivacyPolicy = ({ onClose }: PrivacyPolicyProps) => {
             href="mailto:contact@danse-contemporaine.fr"
             sx={{ color: "#00ff88" }}
           >
-            contact@danse-contemporaine.fr
+            cambalea94@gmail.com
           </Link>
         </Typography>
         <Typography component="li">
-          <strong>Adresse postale</strong> : 12 Rue de la Danse, 75000 Paris
+          <strong>Adresse postale</strong> : 12 Mail Saussure 94000 Créteil
         </Typography>
       </Typography>
 

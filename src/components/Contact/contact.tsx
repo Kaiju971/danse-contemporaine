@@ -173,7 +173,7 @@ export const Contact = () => {
                     >
                       Adresse
                     </Typography>
-                    <Typography>123 Rue de la Danse, 75000 Paris</Typography>
+                    <Typography>12 Mail Saussure 94000 Créteil</Typography>
                   </Box>
                 </InfoItem>
                 <InfoItem>
@@ -205,7 +205,7 @@ export const Contact = () => {
                     >
                       Email
                     </Typography>
-                    <Typography>contact@cambalea.fr</Typography>
+                    <Typography>cambalea94@gmail.com</Typography>
                   </Box>
                 </InfoItem>
               </InfoCard>

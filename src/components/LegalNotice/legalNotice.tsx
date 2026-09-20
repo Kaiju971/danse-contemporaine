@@ -79,7 +79,7 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
           mb: 2,
         }}
       >
-        <strong>Nom de l'école :</strong> Danse Contemporaine
+        <strong>Nom de l'association :</strong> Cambaléa
       </Typography>
       <Typography
         variant="body1"
@@ -101,7 +101,7 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
           mb: 2,
         }}
       >
-        <strong>Adresse :</strong> 12 Rue de la Danse, 75000 Paris
+        <strong>Adresse :</strong> 12 Mail Saussure 94000 Créteil
       </Typography>
       <Typography
         variant="body1"
@@ -123,7 +123,7 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
           mb: 2,
         }}
       >
-        <strong>Email :</strong> contact@danse-contemporaine.fr
+        <strong>Email :</strong> cambalea94@gmail.com
       </Typography>
       <Typography
         variant="body1"
@@ -134,7 +134,7 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
           mb: 2,
         }}
       >
-        <strong>Directrice de la publication :</strong> Pascale [Nom de famille]
+        <strong>Directrice de la publication :</strong> Pascale RICOULT
       </Typography>
 
       <Divider sx={{ my: 3 }} />
