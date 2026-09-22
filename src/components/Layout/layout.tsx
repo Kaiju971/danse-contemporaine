@@ -17,11 +17,8 @@ import LogoApp from "../../components/Logo/logoApp"; // Adapte l'import selon qu
 import LOGO from "../../assets/image/LOGO-removebg-preview.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";
 import YouTube from "@mui/icons-material/YouTube";
-import LinkedIn from "@mui/icons-material/LinkedIn";
-import X from "@mui/icons-material/X";
 import TikTok from "@mui/icons-material/MusicNote";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
@@ -30,9 +27,9 @@ import { FooterText, FooterLink } from "../Footer/footer.styled";
 
 const navItems = [
   { id: "home", label: "Accueil" },
-  { id: "about", label: "L'école" },
-  { id: "courses", label: "Nos cours" },
-  { id: "teachers", label: "Professeurs" },
+  { id: "about", label: "L'association" },
+  { id: "courses", label: "Nos activités" },
+  { id: "teachers", label: "L'équipe" },
   { id: "gallery", label: "Galerie" },
   { id: "schedule", label: "Planning" },
   { id: "pricing", label: "Tarifs" },
@@ -40,11 +37,9 @@ const navItems = [
 ];
 
 const socialLinks = [
-  { name: "Facebook", icon: <Facebook />, url: "#" },
   { name: "Instagram", icon: <Instagram />, url: "#" },
   { name: "YouTube", icon: <YouTube />, url: "#" },
-  { name: "LinkedIn", icon: <LinkedIn />, url: "#" },
-  { name: "X", icon: <X />, url: "#" },
+
   { name: "TikTok", icon: <TikTok />, url: "#" },
 ];
 

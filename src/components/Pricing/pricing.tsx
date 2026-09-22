@@ -8,34 +8,34 @@ import {
 import { Container, Grid, Typography, Box, Divider } from "@mui/material";
 
 const pricingOptions = [
-  {
-    id: 1,
-    type: "Cours à l'unité",
-    price: "15€",
-    detail: "Par cours",
-    isFeatured: false,
-  },
+  // {
+  //   id: 1,
+  //   type: "Cours à l'unité",
+  //   price: "15€",
+  //   detail: "Par cours",
+  //   isFeatured: false,
+  // },
   {
     id: 2,
-    type: "Abonnement Mensuel",
+    type: "Adhésion Mensuelle",
     price: "50€",
-    detail: "4 cours/mois",
+    // detail: "4 cours/mois",
     isFeatured: true,
   },
   {
     id: 3,
     type: "Abonnement Annuel",
     price: "450€",
-    detail: "Économie de 10%",
+    // detail: "Économie de 10%",
     isFeatured: false,
   },
-  {
-    id: 4,
-    type: "Cours Enfant",
-    price: "12€",
-    detail: "Par cours",
-    isFeatured: false,
-  },
+  // {
+  //   id: 4,
+  //   type: "Cours Enfant",
+  //   price: "12€",
+  //   detail: "Par cours",
+  //   isFeatured: false,
+  // },
 ];
 
 export const Pricing = () => {
@@ -70,7 +70,16 @@ export const Pricing = () => {
           </Typography>
         </motion.div>
 
-        <Grid container spacing={3} sx={{ mt: 2 }}>
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            mt: 4,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {pricingOptions.map((option, index) => (
             <Grid size={{ xs: 12, sm: 6, lg: 3 }} key={option.id}>
               <motion.div
@@ -103,12 +112,12 @@ export const Pricing = () => {
                   >
                     /mois
                   </Typography>
-                  <Typography
+                  {/* <Typography
                     variant="body2"
                     sx={{ mb: 2, color: "text.secondary" }}
                   >
                     {option.detail}
-                  </Typography>
+                  </Typography> */}
                   <PricingButton
                     fullWidth
                     variant="contained"

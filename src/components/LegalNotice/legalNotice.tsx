@@ -203,7 +203,7 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
         L'ensemble de ce site relève de la législation française et
         internationale sur le droit d'auteur et la propriété intellectuelle.
         Toutes les marques, logos, photos et contenus présents sur ce site sont
-        la propriété exclusive de l'école Danse Contemporaine.
+        la propriété exclusive de Cambaléa.
       </Typography>
       <Typography
         variant="body1"
@@ -217,7 +217,7 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
         Toute reproduction, représentation, modification, publication,
         adaptation de tout ou partie des éléments du site, quel que soit le
         moyen ou le procédé utilisé, est interdite sans autorisation écrite
-        préalable de l'école Danse Contemporaine.
+        préalable de Cambaléa.
       </Typography>
 
       <Divider sx={{ my: 3 }} />
@@ -265,7 +265,7 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
         }}
       >
         Pour exercer ces droits, vous pouvez nous contacter à l'adresse :
-        contact@danse-contemporaine.fr.
+        cambalea94@gmail.com.
       </Typography>
       <Typography
         variant="body1"
@@ -307,9 +307,9 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
         }}
       >
         Les informations contenues sur ce site sont données à titre indicatif et
-        ne sont pas exhaustives. L'école Danse Contemporaine ne saurait être
-        tenue responsable des dommages directs ou indirects résultant de l'accès
-        à ce site ou de l'utilisation des informations qui y sont contenues.
+        ne sont pas exhaustives. Cambaléa ne saurait être tenue responsable des
+        dommages directs ou indirects résultant de l'accès à ce site ou de
+        l'utilisation des informations qui y sont contenues.
       </Typography>
 
       <Divider sx={{ my: 3 }} />
@@ -327,9 +327,9 @@ export const LegalNotice = ({ onPrivacyClick, onClose }: LegalNoticeProps) => {
           mb: 2,
         }}
       >
-        Tout litige en relation avec l'utilisation du site
-        danse-contemporaine.fr est soumis au droit français. Il est fait
-        attribution exclusive de juridiction aux tribunaux compétents de Paris.
+        Tout litige en relation avec l'utilisation du site cambalea.netlify.app
+        est soumis au droit français. Il est fait attribution exclusive de
+        juridiction aux tribunaux compétents de Paris.
       </Typography>
 
       <Typography

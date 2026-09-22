@@ -22,21 +22,13 @@ import {
   LocationOn,
   Phone,
   Email,
-  Facebook,
   Instagram,
   YouTube,
-  X,
 } from "@mui/icons-material";
-import LinkedIn from "@mui/icons-material/LinkedIn";
+
 import TikTok from "@mui/icons-material/MusicNote";
-// import Instagram from "..//../assets/image/instagram.png"
 
 const socialLinks = [
-  {
-    name: "Facebook",
-    icon: <Facebook />,
-    url: "https://www.facebook.com/cambalea",
-  },
   {
     name: "Instagram",
     icon: <Instagram />,
@@ -47,16 +39,7 @@ const socialLinks = [
     icon: <YouTube />,
     url: "https://www.youtube.com/@cambalea",
   },
-  {
-    name: "LinkedIn",
-    icon: <LinkedIn />,
-    url: "https://www.linkedin.com/company/cambalea/",
-  },
-  {
-    name: "X",
-    icon: <X />,
-    url: "https://x.com/cambalea",
-  },
+
   {
     name: "TikTok",
     icon: <TikTok />,
@@ -221,7 +204,14 @@ export const Contact = () => {
                 <Typography variant="h4" gutterBottom>
                   Réseaux sociaux
                 </Typography>
-                <Box sx={{ display: "flex" }}>
+                <Box
+                  sx={{
+                    mt: 2,
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                  
+                  }}
+                >
                   {socialLinks.map((social) => (
                     <IconButton
                       key={social.name}
@@ -400,12 +390,12 @@ export const Contact = () => {
                         >
                           Sélectionnez un cours
                         </MenuItem>
-                        <MenuItem value="Contemporain Débutant">
+                        {/* <MenuItem value="Contemporain Débutant">
                           Contemporain Débutant
                         </MenuItem>
                         <MenuItem value="Contemporain Intermédiaire">
                           Contemporain Intermédiaire
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem value="Atelier Création">
                           Atelier Création
                         </MenuItem>

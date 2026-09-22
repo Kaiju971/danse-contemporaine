@@ -362,7 +362,7 @@ const teachers = [
     name: "Pascale",
     role: "Fondatrice & Professeure",
     description:
-      "Fondée par Pascale, Danse contemporaine est une école pleine d'énergie et de bienveillance.",
+      "Fondée par Pascale, Cambaléa est un atelier plein d'énergie et de bienveillance.",
     image: image3,
     position: { x: 43, y: 60 },
   },
@@ -434,7 +434,7 @@ export const Teachers = () => {
               fontSize: { xs: "2rem", md: "3rem", lg: "4rem" },
             }}
           >
-            NOS PROFESSEURS
+            L'ÉQUIPE
           </Typography>
           <Typography
             variant="body1"

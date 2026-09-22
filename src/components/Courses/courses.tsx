@@ -14,28 +14,28 @@ import {
 } from "@mui/material";
 
 const courses = [
-  {
-    id: 1,
-    title: "Contemporain Débutant",
-    description:
-      "Découverte des bases de la danse contemporaine pour tous les âges.",
-    duration: "1h",
-    level: "Débutant",
-  },
-  {
-    id: 2,
-    title: "Contemporain Intermédiaire",
-    description:
-      "Approfondissement des techniques et travail sur l'expression corporelle.",
-    duration: "1h30",
-    level: "Intermédiaire",
-  },
+  // {
+  //   id: 1,
+  //   title: "Contemporain Débutant",
+  //   description:
+  //     "Découverte des bases de la danse contemporaine pour tous les âges.",
+  //   duration: "1h",
+  //   level: "Débutant",
+  // },
+  // {
+  //   id: 2,
+  //   title: "Contemporain Intermédiaire",
+  //   description:
+  //     "Approfondissement des techniques et travail sur l'expression corporelle.",
+  //   duration: "1h30",
+  //   level: "Intermédiaire",
+  // },
   {
     id: 3,
-    title: "Atelier Création",
+    title: "Atelier Chorégraphique",
     description:
-      "Création chorégraphique collective pour les danseurs confirmés.",
-    duration: "2h",
+      "Création chorégraphique collective pour les danseurs confirmés. Une pratique régulière de la danse ou d'une activité physique est recommandée : l'atelier suppose une disponibilité corporelle, une endurance permettant de tenir 3h de travail et une aisance dans l'apprentissage.",
+    duration: "3h",
     level: "Avancé",
   },
 ];
@@ -59,7 +59,7 @@ export const Courses = () => {
               fontSize: { xxs: "0.5rem", xs: "2rem", md: "6rem" },
             }}
           >
-            NOS COURS
+            NOS ACTIVITÉS
           </Typography>
           <Typography
             variant="body1"
@@ -71,9 +71,18 @@ export const Courses = () => {
           </Typography>
         </motion.div>
 
-        <Grid container spacing={4} sx={{ mt: 4 }}>
+        <Grid
+          container
+          spacing={0}
+          sx={{
+            mt: 4,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {courses.map((course, index) => (
-            <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={course.id}>
+            <Grid size={{ xs: 16, sm: 12, lg: 10 }} key={course.id}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +100,7 @@ export const Courses = () => {
                     >
                       {course.title}
                     </Typography>
-                    <Typography variant="body2" sx={{ mb: 2 }}>
+                    <Typography variant="body1" sx={{ mb: 2 }}>
                       {course.description}
                     </Typography>
                     <Box

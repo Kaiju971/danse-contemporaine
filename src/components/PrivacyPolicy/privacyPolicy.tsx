@@ -82,11 +82,10 @@ export const PrivacyPolicy = ({ onClose }: PrivacyPolicyProps) => {
           mb: 2,
         }}
       >
-        L’association <strong>Danse Contemporaine</strong> (ci-après «
-        l’Association ») s’engage à protéger la vie privée de ses membres,
-        élèves et visiteurs. Cette politique de confidentialité explique comment
-        nous collectons, utilisons et protégeons vos données personnelles
-        conformément au{" "}
+        L’association <strong>Cambaléa</strong> (ci-après « l’Association »)
+        s’engage à protéger la vie privée de ses membres, élèves et visiteurs.
+        Cette politique de confidentialité explique comment nous collectons,
+        utilisons et protégeons vos données personnelles conformément au{" "}
         <Link
           href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679"
           target="_blank"
@@ -310,10 +309,7 @@ export const PrivacyPolicy = ({ onClose }: PrivacyPolicyProps) => {
         }}
       >
         Pour exercer ces droits, envoyez un e-mail à{" "}
-        <Link
-          href="mailto:contact@danse-contemporaine.fr"
-          sx={{ color: "#00ff88" }}
-        >
+        <Link href="mailto:cambalea94@gmail.com" sx={{ color: "#00ff88" }}>
           cambalea94@gmail.com
         </Link>{" "}
         ou un courrier à l’adresse de l’association. Nous répondrons dans un
@@ -441,10 +437,7 @@ export const PrivacyPolicy = ({ onClose }: PrivacyPolicyProps) => {
       <Typography component="ul" sx={{ pl: 4, mb: 2 }}>
         <Typography component="li">
           <strong>E-mail</strong> :{" "}
-          <Link
-            href="mailto:contact@danse-contemporaine.fr"
-            sx={{ color: "#00ff88" }}
-          >
+          <Link href="mailto:cambalea94@gmail.com" sx={{ color: "#00ff88" }}>
             cambalea94@gmail.com
           </Link>
         </Typography>

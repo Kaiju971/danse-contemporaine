@@ -124,14 +124,14 @@ export const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Typography
+          {/* <Typography
             variant="h1"
             align="center"
             gutterBottom
             sx={{ fontSize: { xxs: "0.5rem", xs: "2rem", md: "5rem" } }}
           >
             ATELIER CHORÉGRAPHIQUE
-          </Typography>
+          </Typography> */}
           <Typography
             variant="h1"
             align="center"
@@ -142,7 +142,7 @@ export const Home = () => {
           >
             CAMBALÉA
           </Typography>
-          <Typography
+          {/* <Typography
             variant="h5"
             align="center"
             sx={{
@@ -155,11 +155,12 @@ export const Home = () => {
           >
             CAMBALÉA est accessible à tous. Fondée par Pascale, c'est un atelier
             de chorégraphie plein d'énergie et de bienveillance.
-          </Typography>
+          </Typography> */}
           <Box
             sx={{
               display: "flex",
               gap: 2,
+              marginTop: "9rem",
               justifyContent: "center",
               flexWrap: "wrap",
             }}
@@ -170,7 +171,7 @@ export const Home = () => {
                 background: "linear-gradient(45deg, #00ff88 0%, #00e67a 100%)",
                 color: "black",
                 fontWeight: 700,
-                padding: "12px 24px",
+                paddingTop: "12px 24px",
                 borderRadius: 4,
               }}
               onClick={() =>
@@ -179,7 +180,7 @@ export const Home = () => {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              DÉCOUVRIR NOS ATELIERS
+              NOUS DÉCOUVRIR
             </Button>
             <Button
               variant="outlined"

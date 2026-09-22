@@ -11,6 +11,7 @@ export const CourseCard = styled(Card)(({ theme }) => ({
   height: "100%",
   transition: "all 0.3s ease",
   border: `1px solid ${theme.palette.divider}`,
+  // marginLeft: "10rem",
   "&:hover": {
     transform: "translateY(-10px)",
     borderColor: theme.palette.primary.main,

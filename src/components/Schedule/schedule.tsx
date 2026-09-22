@@ -3,11 +3,11 @@ import { ScheduleContainer, ScheduleItem, DayCircle } from "./schedule.styled";
 import { Container, Typography, Box } from "@mui/material";
 
 const schedule = [
-  { day: "Lundi", time: "18h-19h", course: "Contemporain Débutant" },
-  { day: "Mardi", time: "19h-20h30", course: "Contemporain Intermédiaire" },
-  { day: "Mercredi", time: "16h-17h", course: "Contemporain Enfant" },
-  { day: "Jeudi", time: "20h-21h30", course: "Atelier Création" },
-  { day: "Samedi", time: "10h-11h", course: "Contemporain Débutant" },
+  // { day: "Lundi", time: "18h-19h", course: "Contemporain Débutant" },
+  // { day: "Mardi", time: "19h-20h30", course: "Contemporain Intermédiaire" },
+  // { day: "Mercredi", time: "16h-17h", course: "Contemporain Enfant" },
+  { day: "vendredi", time: "18h-21h", course: "Atelier Chorégraphique" },
+  // { day: "Samedi", time: "10h-11h", course: "Contemporain Débutant" },
 ];
 
 export const Schedule = () => {

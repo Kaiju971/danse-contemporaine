@@ -1,6 +1,6 @@
 # Cambaléa — École de danse contemporaine
 
-Site vitrine réalisé pour **Cambaléa**, une école de danse contemporaine.
+Site vitrine réalisé pour **Cambaléa**, atelier chorégraphique.
 
 Le site présente l'univers de l'école, ses cours, ses enseignants, son planning, ses tarifs ainsi qu'une galerie photo.
 
@@ -10,13 +10,13 @@ L'objectif est de proposer une expérience visuelle, immersive et responsive tou
 
 ## ✨ Présentation
 
-Cambaléa est un site vitrine dédié à la présentation d'une école de danse contemporaine.
+Cambaléa est un site vitrine dédié à la présentation d'un atelier chorégraphique.
 
 Le site met l'accent sur :
 
-- la présentation de l'école
-- les cours de danse contemporaine
-- les enseignants
+- la présentation de l'assocition
+- les ateliers chorégraphique
+- l'équipe
 - le planning
 - les tarifs
 - la galerie photo
@@ -51,7 +51,7 @@ Le site met l'accent sur :
 
 ## 🎨 Interface
 
-Le site possède une interface pensée autour de l'univers artistique de la danse contemporaine.
+Le site possède une interface pensée autour de l'univers artistique de la chorégraphie.
 
 ### Fonctionnalités visuelles
 
@@ -74,21 +74,21 @@ Le site possède une interface pensée autour de l'univers artistique de la dans
 Le site est organisé autour de plusieurs sections :
 
 - **Accueil**
-- **À propos / École**
+- **À propos / Association**
 - **Cours**
-- **Enseignants**
+- **Equipe**
 - **Planning**
 - **Tarifs**
 - **Galerie**
 - **Contact**
 
-Certaines sections sont accessibles directement depuis la navigation principale.
+Les sections sont accessibles directement depuis la navigation principale.
 
 ---
 
 ## 🖼️ Galerie
 
-La galerie présente une sélection d'images de l'école.
+La galerie présente une sélection d'images de l'association.
 
 Pour conserver une interface légère, la section principale affiche une image de présentation tandis que les autres images sont accessibles via une galerie interactive.
 
@@ -103,9 +103,9 @@ La galerie permet notamment :
 
 ## 👩‍🏫 Enseignants
 
-La section consacrée aux enseignants utilise une présentation sous forme de cartes.
+La section consacrée à l'équipe utilise une présentation sous forme de cartes.
 
-Chaque enseignant peut être présenté avec :
+Chaque memebre de l'équipe peut être présenté avec :
 
 - sa photographie
 - son nom
