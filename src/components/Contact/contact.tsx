@@ -737,7 +737,7 @@ export const Contact = () => {
                       <TextField
                         fullWidth
                         label="Nom"
-                        name="lastName"
+                        name="Nom de famille"
                         value={formData.lastName}
                         onChange={handleChange}
                         required
@@ -758,7 +758,7 @@ export const Contact = () => {
                       <TextField
                         fullWidth
                         label="Prénom"
-                        name="firstName"
+                        name="Prénom"
                         value={formData.firstName}
                         onChange={handleChange}
                         required
@@ -801,7 +801,7 @@ export const Contact = () => {
                       <TextField
                         fullWidth
                         label="Téléphone"
-                        name="phone"
+                        name="Téléphone"
                         value={formData.phone}
                         onChange={handleChange}
                         slotProps={{
@@ -821,7 +821,7 @@ export const Contact = () => {
                       <TextField
                         fullWidth
                         label="Cours souhaité"
-                        name="course"
+                        name="Cours souhaité"
                         value={formData.course}
                         onChange={handleChange}
                         select
