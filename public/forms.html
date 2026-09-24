@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Netlify Form</title>
+</head>
+<body>
+  <!-- Formulaire statique lu par Netlify lors du build -->
+  <form name="contact" netlify netlify-honeypot="bot-field" action="/forms.html" hidden>
+    <input type="text" name="bot-field" />
+    <input type="text" name="lastName" />
+    <input type="text" name="firstName" />
+    <input type="email" name="email" />
+    <input type="text" name="phone" />
+    <input type="text" name="course" />
+    <textarea name="message"></textarea>
+  </form>
+</body>
+</html>

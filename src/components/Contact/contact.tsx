@@ -534,7 +534,7 @@ export const Contact = () => {
     setStatus("submitting");
 
     try {
-      await fetch("/index.html", {
+      await fetch("/forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-form-urlencoded" },
         body: new URLSearchParams({
