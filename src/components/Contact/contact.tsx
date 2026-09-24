@@ -534,14 +534,14 @@ export const Contact = () => {
     setStatus("submitting");
 
     try {
-      // Capture automatiquement tous les champs du formulaire (y compris form-name et bot-field)
-      const formElement = e.currentTarget;
-      const data = new FormData(formElement);
-
-      await fetch("/", {
+      await fetch("/index.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-form-urlencoded" },
-        body: new URLSearchParams(data as any).toString(),
+        body: new URLSearchParams({
+          "form-name": "contact",
+          "bot-field": "",
+          ...formData,
+        }).toString(),
       });
 
       setStatus("success");
@@ -717,6 +717,7 @@ export const Contact = () => {
                 <form
                   name="contact"
                   method="POST"
+                  action="/"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
