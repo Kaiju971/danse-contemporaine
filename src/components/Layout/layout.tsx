@@ -14,7 +14,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import LogoApp from "../../components/Logo/logoApp"; // Adapte l'import selon qu'il s'agisse d'un export default ou nommé
-import LOGO from "../../assets/image/LOGO-removebg-preview.png";
+import LOGO from "../../../public/favicon.svg";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Instagram from "@mui/icons-material/Instagram";
