@@ -534,7 +534,7 @@ export const Contact = () => {
     setStatus("submitting");
 
     try {
-      await fetch("/forms.html", {
+      await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-form-urlencoded" },
         body: new URLSearchParams({
@@ -717,7 +717,6 @@ export const Contact = () => {
                 <form
                   name="contact"
                   method="POST"
-                  action="/"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
